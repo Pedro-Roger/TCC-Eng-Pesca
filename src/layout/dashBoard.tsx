@@ -1,8 +1,8 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import logo from "../assets/logoSeaFlow.png";
 
-import Planejamento from "../planejamento";
-import SideBar from "../components/sidebar";
+import { Outlet } from "react-router-dom";
+import SideBar from "../components/ui/sidebar";
 
 const DashBoard = () => {
 
@@ -48,7 +48,7 @@ const DashBoard = () => {
             flex={1} 
             padding={4}
           >
-           <Planejamento/>
+           <Outlet/>
           </Box>
         </Flex>
       </>

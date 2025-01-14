@@ -1,4 +1,4 @@
-import DashBoard from "./layout/dashBoard";
+import Paths from "./routes/paths";
 
 
 const App = () => {
@@ -6,7 +6,7 @@ const App = () => {
 
   return (
     <>
-      <DashBoard />
+      <Paths />
     </>
   );
 };
