@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { GiFlour, GiMountainCave, GiWeight } from "react-icons/gi";
 import { PiShrimpFill } from "react-icons/pi";
 import { FaCalculator, FaClock, FaWeightHanging, FaWeightScale } from "react-icons/fa6";
-import { StyledInput, StyledBox, IconWrapper, LabelText } from "./StyledInputs";
+import * as S from "./StyledInputs";
 
 const Planejamento = () => {
   const [areaVolume, setAreaVolume] = useState<number>(0);
@@ -14,6 +14,7 @@ const Planejamento = () => {
   const [quantidadeSacas, setQuantidadeSacas] = useState<number>(0);
   const [densidade, setDensidade] = useState<number>(0);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const calcularPlanejamento = () => {
     const qtdAnimais = pesoTotalDesejado / (pesoMedioDesejado / 1000);
     setQuantidadeAnimais(qtdAnimais);
@@ -32,7 +33,7 @@ const Planejamento = () => {
     if (areaVolume > 0 && pesoMedioDesejado > 0 && pesoTotalDesejado > 0 && fcaEstimado > 0) {
       calcularPlanejamento();
     }
-  }, [areaVolume, pesoMedioDesejado, pesoTotalDesejado, fcaEstimado]);
+  }, [areaVolume, pesoMedioDesejado, pesoTotalDesejado, fcaEstimado, calcularPlanejamento]);
 
   const handleInputChange = (field: string, value: string) => {
     const parsedValue = parseFloat(value) || 0;
@@ -56,132 +57,132 @@ const Planejamento = () => {
 
       <div style={{ display: "flex", flexWrap: "wrap", padding: "100px", marginLeft: "50px", gap: "50px" }}>
         {/* Área ou Volume */}
-        <StyledBox>
-          <IconWrapper>
+        <S.StyledBox>
+          <S.IconWrapper>
             <GiMountainCave size={40} color={"aliceblue"} />
-          </IconWrapper>
+          </S.IconWrapper>
           <div>
-            <LabelText>Área (m2) ou Volume (L)</LabelText>
-            <StyledInput
+            <S.LabelTextArea>Área (m2) ou Volume (L)</S.LabelTextArea>
+            <S.StyledInput
               placeholder="Digite aqui"
               type="number"
               value={areaVolume}
               onChange={(e) => handleInputChange("areaVolume", e.target.value)}
             />
           </div>
-        </StyledBox>
+        </S.StyledBox>
 
         {/* Peso Total Desejado */}
-        <StyledBox>
-          <IconWrapper>
+        <S.StyledBox>
+          <S.IconWrapper>
             <FaWeightHanging size={40} color={"aliceblue"} />
-          </IconWrapper>
+          </S.IconWrapper>
           <div>
-            <LabelText>Peso Total Desejado (kg)</LabelText>
-            <StyledInput
+            <S.LabelTextPesoTotal>Peso Total Desejado (kg)</S.LabelTextPesoTotal>
+            <S.StyledInput
               placeholder="Digite aqui"
               type="number"
               value={pesoTotalDesejado}
               onChange={(e) => handleInputChange("pesoTotalDesejado", e.target.value)}
             />
           </div>
-        </StyledBox>
+        </S.StyledBox>
 
         {/* Peso Médio Desejado */}
-        <StyledBox>
-          <IconWrapper>
+        <S.StyledBox>
+          <S.IconWrapper>
             <FaWeightScale size={40} color={"aliceblue"} />
-          </IconWrapper>
+          </S.IconWrapper>
           <div>
-            <LabelText>Peso Médio Desejado (g)</LabelText>
-            <StyledInput
+            <S.LabelTextPesoMedio>Peso Médio Desejado (g)</S.LabelTextPesoMedio>
+            <S.StyledInput
               placeholder="Digite aqui"
               type="number"
               value={pesoMedioDesejado}
               onChange={(e) => handleInputChange("pesoMedioDesejado", e.target.value)}
             />
           </div>
-        </StyledBox>
+        </S.StyledBox>
 
         {/* FCA Estimado */}
-        <StyledBox>
-          <IconWrapper>
+        <S.StyledBox>
+          <S.IconWrapper>
             <FaCalculator size={40} color={"aliceblue"} />
-          </IconWrapper>
+          </S.IconWrapper>
           <div>
-            <LabelText>FCA Estimado</LabelText>
-            <StyledInput
+            <S.LabelTextFca>FCA Estimado</S.LabelTextFca>
+            <S.StyledInput
               placeholder="Digite aqui"
               type="number"
               value={fcaEstimado}
               onChange={(e) => handleInputChange("fcaEstimado", e.target.value)}
             />
           </div>
-        </StyledBox>
+        </S.StyledBox>
 
         {/* Quantidade de Animais */}
-        <StyledBox>
-          <IconWrapper>
+        <S.StyledBox>
+          <S.IconWrapper>
             <PiShrimpFill size={40} color={"aliceblue"} />
-          </IconWrapper>
+          </S.IconWrapper>
           <div>
-            <LabelText>Quantidade de Animais</LabelText>
-            <StyledInput
+            <S.LabelTextQtdA>Quantidade de Animais</S.LabelTextQtdA>
+            <S.StyledInput
               placeholder="Calculado automaticamente"
               type="number"
               value={quantidadeAnimais}
               readOnly
             />
           </div>
-        </StyledBox>
+        </S.StyledBox>
 
         {/* Quantidade de Ração */}
-        <StyledBox>
-          <IconWrapper>
+        <S.StyledBox>
+          <S.IconWrapper>
             <GiFlour size={40} color={"aliceblue"} />
-          </IconWrapper>
+          </S.IconWrapper>
           <div>
-            <LabelText>Quantidade de Ração (kg)</LabelText>
-            <StyledInput
+            <S.LabelTextQtdR>Quantidade de Ração (kg)</S.LabelTextQtdR>
+            <S.StyledInput
               placeholder="Calculado automaticamente"
               type="number"
               value={quantidadeRacao}
               readOnly
             />
           </div>
-        </StyledBox>
+        </S.StyledBox>
 
         {/* Quantidade de Sacas */}
-        <StyledBox>
-          <IconWrapper>
+        <S.StyledBox>
+          <S.IconWrapper>
             <GiWeight size={40} color={"aliceblue"} />
-          </IconWrapper>
+          </S.IconWrapper>
           <div>
-            <LabelText>Quantidade de Sacas (25kg)</LabelText>
-            <StyledInput
+            <S.LabelTextQtdS>Quantidade de Sacas (25kg)</S.LabelTextQtdS>
+            <S.StyledInput
               placeholder="Calculado automaticamente"
               type="number"
               value={quantidadeSacas}
               readOnly
             />
           </div>
-        </StyledBox>
+        </S.StyledBox>
 
         {/* Densidade */}
-        <StyledBox>
-          <IconWrapper>
+        <S.StyledBox>
+          <S.IconWrapper>
             <FaClock size={40} color={"aliceblue"} />
-          </IconWrapper>
+          </S.IconWrapper>
           <div>
-            <LabelText>Densidade (animais/m²)</LabelText>
-            <StyledInput
+            <S.LabelTextDensidade>Densidade (animais/m²)</S.LabelTextDensidade>
+            <S.StyledInput
               placeholder="Calculado automaticamente"
               type="number"
               value={densidade}
               readOnly
             />
           </div>
-        </StyledBox>
+        </S.StyledBox>
       </div>
     </>
   );
