@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa6";
 import * as S from "./StyledInputs";
 
-const PlanejamentoCamarao = () => {
+const Planejamentocamarao = () => {
   const [areaVolume, setAreaVolume] = useState<number>(0);
   const [pesoMedioDesejado, setPesoMedioDesejado] = useState<number>(0);
   const [pesoTotalDesejado, setPesoTotalDesejado] = useState<number>(0);
@@ -93,7 +93,7 @@ const PlanejamentoCamarao = () => {
             <GiMountainCave size={40} color={"aliceblue"} />
           </S.IconWrapper>
           <div>
-            <S.LabelTextArea>Área do Viveiro (m2)</S.LabelTextArea>
+            <S.LabelTextArea>Área do Viveiro (m2) </S.LabelTextArea>
             <S.StyledInput
               placeholder="Digite aqui"
               type="number"
@@ -218,4 +218,4 @@ const PlanejamentoCamarao = () => {
   );
 };
 
-export default PlanejamentoCamarao;
+export default Planejamentocamarao;
