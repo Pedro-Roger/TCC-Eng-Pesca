@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { GiFlour, GiMountainCave, GiWeight } from "react-icons/gi";
 import { PiShrimpFill } from "react-icons/pi";
-import { FaCalculator, FaClock, FaWeightHanging, FaWeightScale } from "react-icons/fa6";
+import {
+  FaCalculator,
+  FaClock,
+  FaWeightHanging,
+  FaWeightScale,
+} from "react-icons/fa6";
 import * as S from "./StyledInputs";
 
-const Planejamento = () => {
+const PlanejamentoCamarao = () => {
   const [areaVolume, setAreaVolume] = useState<number>(0);
   const [pesoMedioDesejado, setPesoMedioDesejado] = useState<number>(0);
   const [pesoTotalDesejado, setPesoTotalDesejado] = useState<number>(0);
@@ -30,10 +35,21 @@ const Planejamento = () => {
   };
 
   useEffect(() => {
-    if (areaVolume > 0 && pesoMedioDesejado > 0 && pesoTotalDesejado > 0 && fcaEstimado > 0) {
+    if (
+      areaVolume > 0 &&
+      pesoMedioDesejado > 0 &&
+      pesoTotalDesejado > 0 &&
+      fcaEstimado > 0
+    ) {
       calcularPlanejamento();
     }
-  }, [areaVolume, pesoMedioDesejado, pesoTotalDesejado, fcaEstimado, calcularPlanejamento]);
+  }, [
+    areaVolume,
+    pesoMedioDesejado,
+    pesoTotalDesejado,
+    fcaEstimado,
+    calcularPlanejamento,
+  ]);
 
   const handleInputChange = (field: string, value: string) => {
     const parsedValue = parseFloat(value) || 0;
@@ -51,18 +67,33 @@ const Planejamento = () => {
 
   return (
     <>
-      <h1 style={{ fontSize: "40px", color: "aliceblue", fontWeight: 400, marginLeft: "150px", marginTop: "10px" }}>
-        Planejamento
+      <h1
+        style={{
+          fontSize: "40px",
+          color: "aliceblue",
+          fontWeight: 400,
+          marginLeft: "150px",
+          marginTop: "10px",
+        }}
+      >
+        Planejamento Camarão
       </h1>
 
-      <div style={{ display: "flex", flexWrap: "wrap", padding: "100px", marginLeft: "50px", gap: "50px" }}>
-        {/* Área ou Volume */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          padding: "100px",
+          marginLeft: "50px",
+          gap: "50px",
+        }}
+      >
         <S.StyledBox>
           <S.IconWrapper>
             <GiMountainCave size={40} color={"aliceblue"} />
           </S.IconWrapper>
           <div>
-            <S.LabelTextArea>Área (m2) ou Volume (L)</S.LabelTextArea>
+            <S.LabelTextArea>Área do Viveiro (m2)</S.LabelTextArea>
             <S.StyledInput
               placeholder="Digite aqui"
               type="number"
@@ -72,23 +103,25 @@ const Planejamento = () => {
           </div>
         </S.StyledBox>
 
-        {/* Peso Total Desejado */}
         <S.StyledBox>
           <S.IconWrapper>
             <FaWeightHanging size={40} color={"aliceblue"} />
           </S.IconWrapper>
           <div>
-            <S.LabelTextPesoTotal>Peso Total Desejado (kg)</S.LabelTextPesoTotal>
+            <S.LabelTextPesoTotal>
+              Peso Total Desejado (kg)
+            </S.LabelTextPesoTotal>
             <S.StyledInput
               placeholder="Digite aqui"
               type="number"
               value={pesoTotalDesejado}
-              onChange={(e) => handleInputChange("pesoTotalDesejado", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("pesoTotalDesejado", e.target.value)
+              }
             />
           </div>
         </S.StyledBox>
 
-        {/* Peso Médio Desejado */}
         <S.StyledBox>
           <S.IconWrapper>
             <FaWeightScale size={40} color={"aliceblue"} />
@@ -99,12 +132,13 @@ const Planejamento = () => {
               placeholder="Digite aqui"
               type="number"
               value={pesoMedioDesejado}
-              onChange={(e) => handleInputChange("pesoMedioDesejado", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("pesoMedioDesejado", e.target.value)
+              }
             />
           </div>
         </S.StyledBox>
 
-        {/* FCA Estimado */}
         <S.StyledBox>
           <S.IconWrapper>
             <FaCalculator size={40} color={"aliceblue"} />
@@ -120,7 +154,6 @@ const Planejamento = () => {
           </div>
         </S.StyledBox>
 
-        {/* Quantidade de Animais */}
         <S.StyledBox>
           <S.IconWrapper>
             <PiShrimpFill size={40} color={"aliceblue"} />
@@ -136,7 +169,6 @@ const Planejamento = () => {
           </div>
         </S.StyledBox>
 
-        {/* Quantidade de Ração */}
         <S.StyledBox>
           <S.IconWrapper>
             <GiFlour size={40} color={"aliceblue"} />
@@ -152,7 +184,6 @@ const Planejamento = () => {
           </div>
         </S.StyledBox>
 
-        {/* Quantidade de Sacas */}
         <S.StyledBox>
           <S.IconWrapper>
             <GiWeight size={40} color={"aliceblue"} />
@@ -168,7 +199,6 @@ const Planejamento = () => {
           </div>
         </S.StyledBox>
 
-        {/* Densidade */}
         <S.StyledBox>
           <S.IconWrapper>
             <FaClock size={40} color={"aliceblue"} />
@@ -188,4 +218,4 @@ const Planejamento = () => {
   );
 };
 
-export default Planejamento;
+export default PlanejamentoCamarao;

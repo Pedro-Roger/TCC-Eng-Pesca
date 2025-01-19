@@ -1,7 +1,10 @@
 import { Button, VStack } from "@chakra-ui/react";
 import { FiPlus } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+
+    const navigate = useNavigate();
 
     const SidebarButton = ({ children }: { children: string }) => {
         return (
@@ -17,7 +20,7 @@ const SideBar = () => {
             color={"aliceblue"} 
             bg="#2C9CA9" 
             w={"279px"} 
-            h={"100vh"} 
+            h={{ base: "100vh", md: "auto", }} 
             padding={"20px"} 
             gap={"20px"} 
             overflowY="auto"
@@ -30,9 +33,11 @@ const SideBar = () => {
               borderRadius={"0px"} 
               mb={"20px"} 
               mt={"20px"}
+              onClick={() => navigate("/")}
             >
               Novo Projeto
               <FiPlus />
+
             </Button>
   
             <SidebarButton>Lista de projetos</SidebarButton>

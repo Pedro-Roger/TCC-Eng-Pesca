@@ -46,7 +46,7 @@ const DashBoard = () => {
   
           <Box 
             flex={1} 
-            padding={4}
+            
           >
            <Outlet/>
           </Box>

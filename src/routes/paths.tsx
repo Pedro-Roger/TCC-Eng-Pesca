@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DashBoard from "../layout/dashBoard";
-import Planejamento from "../pages/planejamento";
+import Homepage from "../pages/homepage";
+import PlanejamentoCamarao from "../pages/planejamentocamarao";
+import PlanejamentoTilapia from "../pages/planejamentoTilapia";
 
 
 const Paths = () => {
@@ -9,8 +11,10 @@ const Paths = () => {
             <Routes>
                
                 <Route path="/" element={<DashBoard />}>
-                    
-                    <Route index element={<Planejamento />} />
+                    <Route index element={<Homepage />} />
+                    <Route path="PlanejamentoCamarao" element={<PlanejamentoCamarao />} />
+                    <Route path="PlanejamentoTilapia" element={<PlanejamentoTilapia />} />
+
                 </Route>
             </Routes>
         </BrowserRouter>
