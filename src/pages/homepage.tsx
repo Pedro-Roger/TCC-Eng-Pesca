@@ -2,6 +2,7 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import { FaFish, FaShrimp } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
+
 const Homepage = () => {
   const navigate = useNavigate();
   return (
@@ -11,7 +12,7 @@ const Homepage = () => {
       </Text>
 
       <Flex w={"100%"} mt={"150px"} gap={"20px"} justifyContent={"center"} alignItems={"center"}>
-        <Button bg="transparent" border={"1px solid aliceblue"} w={"200px"} onClick={() => navigate("/PlanejamentoCamarao")}>
+        <Button bg="transparent" border={"1px solid aliceblue"} w={"200px"} onClick={() => navigate("/Planejamentocamarao")}>
             <FaShrimp />
           Camarão
         </Button>
@@ -21,6 +22,7 @@ const Homepage = () => {
           Tilápia
         </Button>
       </Flex>
+      
     </Flex>
   );
 };

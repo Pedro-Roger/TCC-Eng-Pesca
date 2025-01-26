@@ -165,7 +165,7 @@ export const LabelTextArea = styled.p`
   @media (max-width: 1920px) {
     font-size: 15px;
     transform: translate(65%, 50%);
-    left: -36%;
+    left: -31%;
   }
 
  
@@ -311,7 +311,7 @@ export const LabelTextFca = styled.p`
   @media (max-width: 1920px) {
     font-size: 15px;
     transform: translate(65%, 50%);
-    left: -36%;
+    left:-50px;
   }
 
  

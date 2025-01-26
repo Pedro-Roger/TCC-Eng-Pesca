@@ -5,11 +5,14 @@ import {
   ColorModeProvider,
   type ColorModeProviderProps,
 } from "./color-mode"
+import { ProjetosProvider } from "../../context/ProjetosContext"
 
 export function Provider(props: ColorModeProviderProps) {
   return (
     <ChakraProvider value={defaultSystem}>
-      <ColorModeProvider {...props} />
+      <ProjetosProvider>
+        <ColorModeProvider {...props} />
+      </ProjetosProvider>
     </ChakraProvider>
   )
 }

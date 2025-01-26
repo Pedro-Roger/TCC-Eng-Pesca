@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GiFlour, GiMountainCave, GiWeight } from "react-icons/gi";
 import { PiShrimpFill } from "react-icons/pi";
 import {
@@ -8,8 +8,10 @@ import {
   FaWeightScale,
 } from "react-icons/fa6";
 import * as S from "./StyledInputs";
+import { Button, Flex } from "@chakra-ui/react";
+import { useProjetos } from "../context/ProjetosContext"; 
 
-const Planejamentocamarao = () => {
+const PlanejamentoCamarao = () => {
   const [areaVolume, setAreaVolume] = useState<number>(0);
   const [pesoMedioDesejado, setPesoMedioDesejado] = useState<number>(0);
   const [pesoTotalDesejado, setPesoTotalDesejado] = useState<number>(0);
@@ -19,7 +21,8 @@ const Planejamentocamarao = () => {
   const [quantidadeSacas, setQuantidadeSacas] = useState<number>(0);
   const [densidade, setDensidade] = useState<number>(0);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const { adicionarProjeto} = useProjetos(); 
+
   const calcularPlanejamento = () => {
     const qtdAnimais = pesoTotalDesejado / (pesoMedioDesejado / 1000);
     setQuantidadeAnimais(qtdAnimais);
@@ -43,13 +46,7 @@ const Planejamentocamarao = () => {
     ) {
       calcularPlanejamento();
     }
-  }, [
-    areaVolume,
-    pesoMedioDesejado,
-    pesoTotalDesejado,
-    fcaEstimado,
-    calcularPlanejamento,
-  ]);
+  }, [areaVolume, pesoMedioDesejado, pesoTotalDesejado, fcaEstimado]);
 
   const handleInputChange = (field: string, value: string) => {
     const parsedValue = parseFloat(value) || 0;
@@ -65,8 +62,32 @@ const Planejamentocamarao = () => {
     }
   };
 
+  const handleSave = () => {
+    const novoProjeto = {
+      id: new Date().getTime(),
+      area: areaVolume,
+      pesoTotal: pesoTotalDesejado,
+      pesoMedio: pesoMedioDesejado,
+      fcaEstimado: fcaEstimado,
+      quantidadeAnimais: quantidadeAnimais,
+      quantidadeRacao: quantidadeRacao,
+      quantidadeSacas: quantidadeSacas,
+      densidadeAnimal: densidade,
+    };
+
+    adicionarProjeto(novoProjeto);
+    alert("Projeto salvo com sucesso!");
+  };
+
   return (
-    <>
+    <Flex
+      as="form"
+      flexDirection="column"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSave();
+      }}
+    >
       <h1
         style={{
           fontSize: "40px",
@@ -214,8 +235,24 @@ const Planejamentocamarao = () => {
           </div>
         </S.StyledBox>
       </div>
-    </>
+
+      <Button
+        type="submit"
+        w={"164px"}
+        h={"50px"}
+        bg={"transparent"}
+        color={"aliceblue"}
+        border={"1px solid aliceblue"}
+        _hover={{ bg: "aliceblue", color: "black" }}
+        ml={"150px"}
+        mt={"-60px"}
+        fontSize={"16px"}
+        fontWeight={"bold"}
+      >
+        Salvar
+      </Button>
+    </Flex>
   );
 };
 
-export default Planejamentocamarao;
+export default PlanejamentoCamarao;

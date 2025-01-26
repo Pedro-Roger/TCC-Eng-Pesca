@@ -3,7 +3,8 @@ import DashBoard from "../layout/dashBoard";
 import Homepage from "../pages/homepage";
 
 import PlanejamentoTilapia from "../pages/planejamentoTilapia";
-import Planejamentocamarao from "../pages/planejamentocamarao";
+import PlanejamentoCamarao from "../pages/planejamentoCamarao";
+import ListaProjetos from "../pages/listaProjetos";
 
 
 
@@ -15,8 +16,9 @@ const Paths = () => {
                
                 <Route path="/" element={<DashBoard />}>
                     <Route index element={<Homepage />} />
-                    <Route path="PlanejamentoCamarao" element={<Planejamentocamarao />} />
+                    <Route path="PlanejamentoCamarao" element={<PlanejamentoCamarao/>} />
                     <Route path="PlanejamentoTilapia" element={<PlanejamentoTilapia />} />
+                    <Route path="ListaProjetos" element={<ListaProjetos/>} />
 
                 </Route>
             </Routes>
