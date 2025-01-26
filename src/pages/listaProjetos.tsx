@@ -1,10 +1,11 @@
-import { Flex, Text, Box, useToast } from "@chakra-ui/react";
+import { Flex, Text, Box,  } from "@chakra-ui/react";
 import { useProjetos } from "../context/ProjetosContext";
 import { CloseButton } from "../components/ui/close-button";
+import { useTabs } from "@chakra-ui/react";
 
 const ListaProjetos = () => {
   const { projetos, removerProjeto } = useProjetos();
-  const toast = useToast();
+  const toast = useTabs
 
   const handleDelete = (id: number) => {
     const confirmar = window.confirm("Tem certeza de que deseja excluir este projeto?");

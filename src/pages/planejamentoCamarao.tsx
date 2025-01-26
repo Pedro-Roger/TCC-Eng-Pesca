@@ -46,7 +46,7 @@ const PlanejamentoCamarao = () => {
     ) {
       calcularPlanejamento();
     }
-  }, [areaVolume, pesoMedioDesejado, pesoTotalDesejado, fcaEstimado]);
+  }, [areaVolume, pesoMedioDesejado, pesoTotalDesejado, fcaEstimado, calcularPlanejamento]);
 
   const handleInputChange = (field: string, value: string) => {
     const parsedValue = parseFloat(value) || 0;

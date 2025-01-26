@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { GiFlour, GiMountainCave, GiWeight } from "react-icons/gi";
 import { PiShrimpFill } from "react-icons/pi";
@@ -8,6 +9,8 @@ import {
   FaWeightScale,
 } from "react-icons/fa6";
 import * as S from "./StyledInputs";
+import { Button, Flex } from "@chakra-ui/react";
+import { useProjetos } from "../context/ProjetosContext"; 
 
 const PlanejamentoTilapia = () => {
   const [areaVolume, setAreaVolume] = useState<number>(0);
@@ -19,7 +22,9 @@ const PlanejamentoTilapia = () => {
   const [quantidadeSacas, setQuantidadeSacas] = useState<number>(0);
   const [densidade, setDensidade] = useState<number>(0);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const { adicionarProjeto } = useProjetos();
+
+  
   const calcularPlanejamento = () => {
     const qtdAnimais = pesoTotalDesejado / (pesoMedioDesejado / 1000);
     setQuantidadeAnimais(qtdAnimais);
@@ -65,8 +70,33 @@ const PlanejamentoTilapia = () => {
     }
   };
 
+  
+  const handleSave = () => {
+    const novoProjeto = {
+      id: new Date().getTime(),
+      area: areaVolume,
+      pesoTotal: pesoTotalDesejado,
+      pesoMedio: pesoMedioDesejado,
+      fcaEstimado: fcaEstimado,
+      quantidadeAnimais: quantidadeAnimais,
+      quantidadeRacao: quantidadeRacao,
+      quantidadeSacas: quantidadeSacas,
+      densidadeAnimal: densidade,
+    };
+
+    adicionarProjeto(novoProjeto); // 
+    alert("Projeto salvo com sucesso!");
+  };
+
   return (
-    <>
+    <Flex
+      as="form"
+      flexDirection="column"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSave();
+      }}
+    >
       <h1
         style={{
           fontSize: "40px",
@@ -214,7 +244,23 @@ const PlanejamentoTilapia = () => {
           </div>
         </S.StyledBox>
       </div>
-    </>
+
+      <Button
+        type="submit"
+        w={"164px"}
+        h={"50px"}
+        bg={"transparent"}
+        color={"aliceblue"}
+        border={"1px solid aliceblue"}
+        _hover={{ bg: "aliceblue", color: "black" }}
+        ml={"150px"}
+        mt={"-60px"}
+        fontSize={"16px"}
+        fontWeight={"bold"}
+      >
+        Salvar
+      </Button>
+    </Flex>
   );
 };
 

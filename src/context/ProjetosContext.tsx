@@ -15,6 +15,7 @@ type Projeto = {
 type ProjetosContextData = {
   projetos: Projeto[];
   adicionarProjeto: (projeto: Omit<Projeto, "id">) => void;
+  removerProjeto: (id: number) => void;
 };
 
 const ProjetosContext = createContext<ProjetosContextData | undefined>(undefined);
