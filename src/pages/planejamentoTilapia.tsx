@@ -74,6 +74,7 @@ const PlanejamentoTilapia = () => {
   const handleSave = () => {
     const novoProjeto = {
       id: new Date().getTime(),
+      tipo: "tilápia",
       area: areaVolume,
       pesoTotal: pesoTotalDesejado,
       pesoMedio: pesoMedioDesejado,

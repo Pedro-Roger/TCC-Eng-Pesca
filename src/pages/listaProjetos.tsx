@@ -1,23 +1,18 @@
-import { Flex, Text, Box,  } from "@chakra-ui/react";
+import { Flex, Text, Box,  } from "@chakra-ui/react"; // Corrigir aqui
 import { useProjetos } from "../context/ProjetosContext";
 import { CloseButton } from "../components/ui/close-button";
-import { useTabs } from "@chakra-ui/react";
 
 const ListaProjetos = () => {
   const { projetos, removerProjeto } = useProjetos();
-  const toast = useTabs
+
 
   const handleDelete = (id: number) => {
-    const confirmar = window.confirm("Tem certeza de que deseja excluir este projeto?");
+    const confirmar = window.confirm(
+      "Tem certeza de que deseja excluir este projeto?"
+    );
     if (confirmar) {
       removerProjeto(id);
-      toast({
-        title: "Projeto excluído.",
-        description: "O projeto foi removido com sucesso.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
+      
     }
   };
 
@@ -53,11 +48,13 @@ const ListaProjetos = () => {
               right="10px"
               size="lg"
               color="white"
-              onClick={() => handleDelete(projeto.id)} 
+              onClick={() => handleDelete(projeto.id)}
               _hover={{ bg: "red.500" }}
             />
             <Text fontSize={"lg"} fontWeight={"bold"}>
-              Área: {projeto.area} m²
+              {projeto.tipo === "camarão"
+                ? `Área: ${projeto.area} m²`
+                : `Volume: ${projeto.area} m³`}
             </Text>
             <Text>Peso total: {projeto.pesoTotal} kg</Text>
             <Text>Peso médio: {projeto.pesoMedio} g</Text>

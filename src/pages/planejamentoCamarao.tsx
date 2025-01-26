@@ -65,6 +65,7 @@ const PlanejamentoCamarao = () => {
   const handleSave = () => {
     const novoProjeto = {
       id: new Date().getTime(),
+      tipo: "camarão",
       area: areaVolume,
       pesoTotal: pesoTotalDesejado,
       pesoMedio: pesoMedioDesejado,

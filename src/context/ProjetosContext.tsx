@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 
 type Projeto = {
   id: number;
+  tipo: "camarão" | "tilápia"; 
   area: number;
   pesoTotal: number;
   pesoMedio: number;
