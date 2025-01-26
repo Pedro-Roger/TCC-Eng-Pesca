@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { GiFlour, GiMountainCave, GiWeight } from "react-icons/gi";
 import { PiShrimpFill } from "react-icons/pi";
 import {
