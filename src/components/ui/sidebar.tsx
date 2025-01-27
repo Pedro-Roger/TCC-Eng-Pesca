@@ -56,7 +56,9 @@ const SideBar = () => {
           Lista de projetos
         </SidebarButton>
         <SidebarButton>Em Andamento</SidebarButton>
-        <SidebarButton>Tabela de Arraçoamento</SidebarButton>
+        <SidebarButton
+          onClick={() => navigate("/TabelaArracoamento")}
+        >Tabela de Arraçoamento</SidebarButton>
         <SidebarButton>Biometria</SidebarButton>
         <SidebarButton>Equipe</SidebarButton>
       </VStack>
