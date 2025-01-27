@@ -2,8 +2,17 @@ import { useState } from "react";
 import * as S from "./tabelaStyled";
 import { Flex, Text } from "@chakra-ui/react";
 
+type Tank = {
+  name: string;
+  numFish: number;
+  avgWeight: number;
+  feedingsPerDay: number;
+  dailyFeedingRate: string;
+  feedPerFeeding: string;
+};
+
 const TabelaArracoamento = () => {
-  const [tanks, setTanks] = useState([]);
+  const [tanks, setTanks] = useState<Tank[]>([]); // Define o tipo Tank[]
   const [currentTank, setCurrentTank] = useState("");
   const [numFish, setNumFish] = useState(0);
   const [avgWeight, setAvgWeight] = useState(0);
@@ -74,7 +83,10 @@ const TabelaArracoamento = () => {
 
       <Flex
         as="form"
-        onSubmit={addTank}
+        onSubmit={(e) => {
+          e.preventDefault();
+          addTank();
+        }}
         gap="1rem"
         flexWrap="wrap"
         justifyContent="center"
