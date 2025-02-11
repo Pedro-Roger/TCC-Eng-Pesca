@@ -6,6 +6,7 @@ import PlanejamentoTilapia from "../pages/planejamentoTilapia";
 import PlanejamentoCamarao from "../pages/planejamentoCamarao";
 import ListaProjetos from "../pages/listaProjetos";
 import TabelaArracoamento from "../pages/tabelaArracoamento";
+import Biometria from "../pages/biometria";
 
 
 
@@ -22,6 +23,7 @@ const Paths = () => {
                     <Route path="PlanejamentoTilapia" element={<PlanejamentoTilapia />} />
                     <Route path="ListaProjetos" element={<ListaProjetos/>} />
                     <Route path="TabelaArracoamento" element={<TabelaArracoamento/>} />
+                    <Route path="Biometria" element={<Biometria/>} />
 
                 </Route>
             </Routes>
