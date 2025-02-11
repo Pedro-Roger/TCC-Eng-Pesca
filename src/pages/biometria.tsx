@@ -1,8 +1,17 @@
 import { useState, useEffect } from "react";
 import { Box, Button, Input, VStack, Text, Flex } from "@chakra-ui/react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import styled from "styled-components";
-import { FaEdit, FaTrashAlt } from "react-icons/fa"; 
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 const GlassContainer = styled.div`
   width: 650px;
@@ -31,14 +40,14 @@ const idealGrowth = [
 ];
 
 const Biometria = () => {
-  const [week, setWeek] = useState("");
-  const [numFish, setNumFish] = useState("");
-  const [totalWeight, setTotalWeight] = useState("");
-  const [data, setData] = useState([]);
-  const [editingWeek, setEditingWeek] = useState(null); // Estado para controlar a edição
+  const [week, setWeek] = useState<number | string>(""); 
+  const [numFish, setNumFish] = useState<number | string>(""); 
+  const [totalWeight, setTotalWeight] = useState<number | string>(""); 
+  const [data, setData] = useState<{ week: number; weight: number }[]>([]); 
+  const [editingWeek, setEditingWeek] = useState<number | null>(null); 
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("biometriaData")) || [];
+    const savedData = JSON.parse(localStorage.getItem("biometriaData") || "[]");
     setData(savedData);
   }, []);
 
@@ -47,42 +56,49 @@ const Biometria = () => {
   }, [data]);
 
   const handleAddData = () => {
-    if (!week || !numFish || !totalWeight || numFish <= 0 || totalWeight <= 0) {
+    if (
+      !week ||
+      !numFish ||
+      !totalWeight ||
+      +numFish <= 0 ||
+      +totalWeight <= 0
+    ) {
       alert("Preencha os campos corretamente!");
       return;
     }
 
-    const avgWeight = (totalWeight / numFish).toFixed(2);
-    const newEntry = { week: parseInt(week), weight: parseFloat(avgWeight) };
+    const avgWeight = (+totalWeight / +numFish).toFixed(2); 
+    const newEntry = { week: +week, weight: parseFloat(avgWeight) };
 
     if (editingWeek !== null) {
-      // Editando um dado existente
       setData(
         data.map((entry) =>
-          entry.week === editingWeek ? { ...entry, weight: newEntry.weight } : entry
+          entry.week === editingWeek
+            ? { ...entry, weight: newEntry.weight }
+            : entry
         )
       );
-      setEditingWeek(null); 
+      setEditingWeek(null);
     } else {
-      
       setData([...data, newEntry].sort((a, b) => a.week - b.week));
     }
 
-    
-    setWeek("");
+    setWeek(""); 
     setNumFish("");
     setTotalWeight("");
   };
 
-  const handleEditData = (weekToEdit) => {
+  const handleEditData = (weekToEdit: number) => {
     const entryToEdit = data.find((entry) => entry.week === weekToEdit);
-    setWeek(entryToEdit.week);
-    setNumFish(entryToEdit.numFish);
-    setTotalWeight(entryToEdit.totalWeight);
-    setEditingWeek(weekToEdit); 
+    if (entryToEdit) {
+      setWeek(entryToEdit.week);
+      setNumFish(entryToEdit.weight.toString()); 
+      setTotalWeight(entryToEdit.weight.toString());
+      setEditingWeek(weekToEdit);
+    }
   };
 
-  const handleDeleteData = (weekToDelete) => {
+  const handleDeleteData = (weekToDelete: number) => {
     setData(data.filter((entry) => entry.week !== weekToDelete));
   };
 
@@ -132,17 +148,45 @@ const Biometria = () => {
           Dados Registrados
         </Text>
 
-        <Box w="100%" mb={6} p={4} borderRadius="8px" bg="#f9f9f9" boxShadow="md">
-          <Box display="flex" justifyContent="space-between" fontWeight="bold" mb={2}>
-            <Text color={"#2C9CA9"} w="40%">Semana</Text>
-            <Text color={"#2C9CA9"} w="40%">Peso Médio (g)</Text>
-            <Text color={"#2C9CA9"} w="20%" textAlign="center">Ações</Text>
+        <Box
+          w="100%"
+          mb={6}
+          p={4}
+          borderRadius="8px"
+          bg="#f9f9f9"
+          boxShadow="md"
+        >
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            fontWeight="bold"
+            mb={2}
+          >
+            <Text color={"#2C9CA9"} w="40%">
+              Semana
+            </Text>
+            <Text color={"#2C9CA9"} w="40%">
+              Peso Médio (g)
+            </Text>
+            <Text color={"#2C9CA9"} w="20%" textAlign="center">
+              Ações
+            </Text>
           </Box>
 
           {data.map((entry) => (
-            <Box key={entry.week} display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-              <Text color={"#2C9CA9"} w="40%">{entry.week}</Text>
-              <Text color={"#2C9CA9"} w="40%">{entry.weight}</Text>
+            <Box
+              key={entry.week}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+            >
+              <Text color={"#2C9CA9"} w="40%">
+                {entry.week}
+              </Text>
+              <Text color={"#2C9CA9"} w="40%">
+                {entry.weight}
+              </Text>
               <Flex w="20%" justifyContent="center">
                 <Button
                   onClick={() => handleEditData(entry.week)}
@@ -197,23 +241,26 @@ const Biometria = () => {
                 }}
               />
               <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="weight"
-                data={data.length > 0 ? data : [{ week: 0, weight: 0 }]}
-                stroke="#3182CE"
-                strokeWidth={2.5}
-                name="Peso Registrado"
-                dot={false}
+              <Legend
+                iconType="line" 
+                wrapperStyle={{ color: "white" }} 
               />
               <Line
                 type="monotone"
                 dataKey="weight"
                 data={idealGrowth}
-                stroke="white"
-                name="Crescimento Ideal"
-                strokeWidth={2.5}
+                stroke="#8884d8"
+                strokeWidth={2}
+                name="Crescimento Ideal" 
+                dot={false}
+              />
+              <Line
+                type="monotone"
+                dataKey="weight"
+                data={data}
+                stroke="#82ca9d"
+                strokeWidth={2}
+                name="Crescimento Real" 
                 dot={false}
               />
             </LineChart>
