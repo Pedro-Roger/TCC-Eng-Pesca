@@ -108,7 +108,7 @@ const Biometria = () => {
         <Text fontSize="2xl" fontWeight="bold" mb={4}>
           Registro de Biometria
         </Text>
-        <VStack spacing={4} align="stretch" mb={6}>
+        <VStack gap={4} align="stretch" mb={6}>
           <Text fontWeight="bold">Semana:</Text>
           <Input
             type="number"
