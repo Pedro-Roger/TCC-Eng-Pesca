@@ -7,6 +7,7 @@ import PlanejamentoCamarao from "../pages/planejamentoCamarao";
 import ListaProjetos from "../pages/listaProjetos";
 import TabelaArracoamento from "../pages/tabelaArracoamento";
 import Biometria from "../pages/biometria";
+import Equipe from "../pages/equipe";
 
 
 
@@ -24,6 +25,7 @@ const Paths = () => {
                     <Route path="ListaProjetos" element={<ListaProjetos/>} />
                     <Route path="TabelaArracoamento" element={<TabelaArracoamento/>} />
                     <Route path="Biometria" element={<Biometria/>} />
+                    <Route path="Equipe" element={<Equipe/>} />
 
                 </Route>
             </Routes>

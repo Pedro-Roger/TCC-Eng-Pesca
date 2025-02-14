@@ -11,7 +11,9 @@ const Homepage = () => {
         Escolha o animal
       </Text>
 
-      <Flex w={"100%"} mt={"150px"} gap={"20px"} justifyContent={"center"} alignItems={"center"}>
+      <Flex w={"100%"} mt={"150px"} gap={"20px"} justifyContent={"center"} alignItems={"center"}
+        flexDirection={{base:"column", md:"row"}}
+      >
         <Button bg="transparent" border={"1px solid aliceblue"} w={"200px"} onClick={() => navigate("/Planejamentocamarao")}>
             <FaShrimp />
           Camarão

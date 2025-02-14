@@ -10,18 +10,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import styled from "styled-components";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
-
-const GlassContainer = styled.div`
-  width: 650px;
-  height: 320px;
-  background: rgba(255, 255, 255, 0.1); /* Fundo translúcido */
-  backdrop-filter: blur(10px); /* Desfoque do fundo */
-  border-radius: 15px; /* Bordas arredondadas */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  padding: 20px;
-`;
 
 const idealGrowth = [
   { week: 1, weight: 5 },
@@ -40,34 +28,38 @@ const idealGrowth = [
 ];
 
 const Biometria = () => {
-  const [week, setWeek] = useState<number | string>(""); 
-  const [numFish, setNumFish] = useState<number | string>(""); 
-  const [totalWeight, setTotalWeight] = useState<number | string>(""); 
-  const [data, setData] = useState<{ week: number; weight: number }[]>([]); 
-  const [editingWeek, setEditingWeek] = useState<number | null>(null); 
+  const [week, setWeek] = useState<number | string>("");
+  const [numFish, setNumFish] = useState<number | string>("");
+  const [totalWeight, setTotalWeight] = useState<number | string>("");
+  const [data, setData] = useState<{ week: number; weight: number }[]>([]);
+  const [editingWeek, setEditingWeek] = useState<number | null>(null);
 
+  // Carrega dados do localStorage ao inicializar
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("biometriaData") || "[]");
     setData(savedData);
   }, []);
 
+  // Salva dados no localStorage sempre que `data` muda
   useEffect(() => {
     localStorage.setItem("biometriaData", JSON.stringify(data));
   }, [data]);
 
   const handleAddData = () => {
-    if (
-      !week ||
-      !numFish ||
-      !totalWeight ||
-      +numFish <= 0 ||
-      +totalWeight <= 0
-    ) {
-      alert("Preencha os campos corretamente!");
+    if (!week || +week <= 0) {
+      alert("A semana deve ser um número positivo!");
+      return;
+    }
+    if (!numFish || +numFish <= 0) {
+      alert("A quantidade de peixes deve ser um número positivo!");
+      return;
+    }
+    if (!totalWeight || +totalWeight <= 0) {
+      alert("O peso total deve ser um número positivo!");
       return;
     }
 
-    const avgWeight = (+totalWeight / +numFish).toFixed(2); 
+    const avgWeight = (+totalWeight / +numFish).toFixed(2);
     const newEntry = { week: +week, weight: parseFloat(avgWeight) };
 
     if (editingWeek !== null) {
@@ -83,7 +75,7 @@ const Biometria = () => {
       setData([...data, newEntry].sort((a, b) => a.week - b.week));
     }
 
-    setWeek(""); 
+    setWeek("");
     setNumFish("");
     setTotalWeight("");
   };
@@ -92,7 +84,7 @@ const Biometria = () => {
     const entryToEdit = data.find((entry) => entry.week === weekToEdit);
     if (entryToEdit) {
       setWeek(entryToEdit.week);
-      setNumFish(entryToEdit.weight.toString()); 
+      setNumFish("1"); // Assume 1 peixe para simplificar
       setTotalWeight(entryToEdit.weight.toString());
       setEditingWeek(weekToEdit);
     }
@@ -102,18 +94,25 @@ const Biometria = () => {
     setData(data.filter((entry) => entry.week !== weekToDelete));
   };
 
+  const handleResetData = () => {
+    setData([]);
+    localStorage.removeItem("biometriaData");
+  };
+
   return (
-    <Flex w={"100%"} h={"100vh"} display="flex" p={10} gap={"80px"}>
-      <Flex flexDirection={"column"}>
+    <Flex w="100%" h="100vh" p={10} gap="80px" bg="transparent">
+      
+      <Flex flexDirection="column" w="40%">
         <Text fontSize="2xl" fontWeight="bold" mb={4}>
           Registro de Biometria
         </Text>
+
         <VStack gap={4} align="stretch" mb={6}>
           <Text fontWeight="bold">Semana:</Text>
           <Input
             type="number"
-            w={400}
-            border={"1px solid #ccc"}
+            w="100%"
+            border="1px solid #ccc"
             value={week}
             onChange={(e) => setWeek(e.target.value)}
             placeholder="Digite a semana"
@@ -122,8 +121,8 @@ const Biometria = () => {
           <Text fontWeight="bold">Quantidade de Peixes:</Text>
           <Input
             type="number"
-            w={400}
-            border={"1px solid #ccc"}
+            w="100%"
+            border="1px solid #ccc"
             value={numFish}
             onChange={(e) => setNumFish(e.target.value)}
             placeholder="Digite a quantidade de peixes"
@@ -132,8 +131,8 @@ const Biometria = () => {
           <Text fontWeight="bold">Peso Total (g):</Text>
           <Input
             type="number"
-            w={400}
-            border={"1px solid #ccc"}
+            w="100%"
+            border="1px solid #ccc"
             value={totalWeight}
             onChange={(e) => setTotalWeight(e.target.value)}
             placeholder="Digite o peso total"
@@ -144,48 +143,39 @@ const Biometria = () => {
           {editingWeek !== null ? "Atualizar" : "Registrar"}
         </Button>
 
+        <Button colorScheme="red" onClick={handleResetData} mb={6}>
+          Limpar Dados
+        </Button>
+
         <Text fontSize="2xl" fontWeight="bold" mb={4}>
           Dados Registrados
         </Text>
 
-        <Box
-          w="100%"
-          mb={6}
-          p={4}
-          borderRadius="8px"
-          bg="#f9f9f9"
-          boxShadow="md"
-        >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            fontWeight="bold"
-            mb={2}
-          >
-            <Text color={"#2C9CA9"} w="40%">
+        <Box w="100%" mb={6} p={4} borderRadius="8px" bg="white" boxShadow="md">
+          <Flex justifyContent="space-between" fontWeight="bold" mb={2}>
+            <Text color="#2C9CA9" w="40%">
               Semana
             </Text>
-            <Text color={"#2C9CA9"} w="40%">
+            <Text color="#2C9CA9" w="40%">
               Peso Médio (g)
             </Text>
-            <Text color={"#2C9CA9"} w="20%" textAlign="center">
+            <Text color="#2C9CA9" w="20%" textAlign="center">
               Ações
             </Text>
-          </Box>
+          </Flex>
 
           {data.map((entry) => (
-            <Box
+            <Flex
               key={entry.week}
-              display="flex"
               justifyContent="space-between"
               alignItems="center"
               mb={2}
             >
-              <Text color={"#2C9CA9"} w="40%">
+              <Text color="#2C9CA9" w="40%">
                 {entry.week}
               </Text>
-              <Text color={"#2C9CA9"} w="40%">
-                {entry.weight}
+              <Text color="#2C9CA9" w="40%">
+                {entry.weight.toFixed(2)}
               </Text>
               <Flex w="20%" justifyContent="center">
                 <Button
@@ -195,7 +185,7 @@ const Biometria = () => {
                   mr={2}
                   variant="ghost"
                 >
-                  <FaEdit />
+                  ✏️
                 </Button>
                 <Button
                   onClick={() => handleDeleteData(entry.week)}
@@ -203,26 +193,39 @@ const Biometria = () => {
                   aria-label="Excluir"
                   variant="ghost"
                 >
-                  <FaTrashAlt />
+                  🗑️
                 </Button>
               </Flex>
-            </Box>
+            </Flex>
           ))}
         </Box>
       </Flex>
 
-      <Flex flexDirection={"column"}>
+      {/* Gráfico de Crescimento */}
+      <Flex flexDirection="column" w="60%">
         <Text fontSize="2xl" fontWeight="bold" mb={4}>
           Gráfico de Crescimento
         </Text>
 
-        <GlassContainer>
-          <ResponsiveContainer width={600} height={300}>
+        <Box
+          w="100%"
+          maxW="650px"
+          h="320px"
+          bg="rgba(255, 255, 255, 0.1)"
+          backdropFilter="blur(10px)"
+          borderRadius="15px"
+          boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
+          p={5}
+        >
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart margin={{ top: 20, right: 30, left: 20, bottom: 30 }}>
               <CartesianGrid stroke="#ccc" opacity={1} vertical={false} />
               <XAxis
                 tick={{ fill: "white" }}
                 dataKey="week"
+                domain={[1,24]} 
+                type="category"
+                ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]}
                 label={{
                   fill: "white",
                   value: "Semana",
@@ -242,8 +245,11 @@ const Biometria = () => {
               />
               <Tooltip />
               <Legend
-                iconType="line" 
-                wrapperStyle={{ color: "white" }} 
+                iconType="line"
+                wrapperStyle={{ color: "white" }}
+                formatter={(value) => (
+                  <span style={{ color: "white" }}>{value}</span>
+                )}
               />
               <Line
                 type="monotone"
@@ -251,7 +257,7 @@ const Biometria = () => {
                 data={idealGrowth}
                 stroke="#8884d8"
                 strokeWidth={2}
-                name="Crescimento Ideal" 
+                name="Crescimento Ideal"
                 dot={false}
               />
               <Line
@@ -260,12 +266,12 @@ const Biometria = () => {
                 data={data}
                 stroke="#82ca9d"
                 strokeWidth={2}
-                name="Crescimento Real" 
+                name="Crescimento Real"
                 dot={false}
               />
             </LineChart>
           </ResponsiveContainer>
-        </GlassContainer>
+        </Box>
       </Flex>
     </Flex>
   );

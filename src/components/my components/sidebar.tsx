@@ -30,6 +30,7 @@ const SideBar = () => {
   return (
     <>
       <VStack
+        display={{ base: "none", md: "block" }}
         color={"aliceblue"}
         bg="#2C9CA9"
         w={"279px"}
@@ -62,7 +63,9 @@ const SideBar = () => {
         <SidebarButton
           onClick={() => navigate("/Biometria")}
         >Biometria</SidebarButton>
-        <SidebarButton>Equipe</SidebarButton>
+        <SidebarButton
+          onClick={() => navigate("/Equipe")}
+        >Equipe</SidebarButton>
       </VStack>
     </>
   );
