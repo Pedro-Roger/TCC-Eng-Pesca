@@ -9,11 +9,11 @@ import Menu from "../components/my components/menu";
 
 const DashBoard = () => {
   const [isOpen, setOpen] = useState(false)
-  const menuRef = useRef(null)
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: Event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (event.target instanceof Node && menuRef.current?.contains(event.target)) {
         setOpen(false);
       }
     };
