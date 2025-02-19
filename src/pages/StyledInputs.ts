@@ -61,7 +61,7 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledBox = styled.div`
-  background-color: #064f57;
+  background-color: #00000d;
   width: 290px;
   height: 94px;
   color: aliceblue;

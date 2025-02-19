@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(to bottom, #2C9CA9, #112022);
+        background: linear-gradient(to bottom,  #000000, #091219, #0d1f2E, #10243E, #091219, #000000);
         width: 100vw;
         height: auto;
         overflow-x: hidden;  
@@ -20,17 +20,17 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     ::-webkit-scrollbar-track {
-        background: #2C9CA9;  
+        background: #808080;  
         border-radius: 10px;
     }
 
     ::-webkit-scrollbar-thumb {
-        background: #064F57;  
+        background: #606060;  
         border-radius: 10px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #4B9F98;  
+        background: #202020;  
     }
 `;
 

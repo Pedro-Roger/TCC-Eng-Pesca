@@ -17,10 +17,18 @@ const SideBar = () => {
         bg="none"
         color="aliceblue"
         fontSize="20px"
-        border="none"
+        mt={"10px"}
         justifyContent="flex-start"
         width="100%"
         onClick={onClick} 
+        _hover={
+          {
+            bg: "#808080",
+            border: "1px solid aliceblue",
+            color: "aliceblue",
+          }
+          
+        }
       >
         {children}
       </Button>
@@ -32,7 +40,7 @@ const SideBar = () => {
       <VStack
         display={{ base: "none", md: "block" }}
         color={"aliceblue"}
-        bg="#2C9CA9"
+        bg="#00000d"
         w={"279px"}
         h={{ base: "100vh", md: "auto" }}
         padding={"20px"}

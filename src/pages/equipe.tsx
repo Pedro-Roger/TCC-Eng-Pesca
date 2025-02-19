@@ -6,51 +6,58 @@ import { useState } from "react";
 const Equipe = () => {
     const[isModalOpen, setIsModalOpen] = useState(false);
 
+    // const [cards, setCards] = useState([]);
+
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
+    // const addCard = (newCard) => {
+    //     setCards([...cards, newCard])
+    //     closeModal();
+    // }
   return (
     <Flex
       w={"100%"}
       h={"100vh"}
       gap={"20px"}
       flexDirection={"column"}
-      p={"20px"}
+      
     >
-      <Text fontSize={"35px"} color={"aliceblue"}>
+      <Text ml={"40px"} mt={"40px"} fontSize={"35px"} color={"aliceblue"}>
         Equipe
       </Text>
      <Card />
 
-     <Button w={"150px"} onClick={openModal}>Adicionar</Button>
+    <Flex
+      gap={"20px"}
+    >
+      
+     <Button bg={"#00000d"} color={"aliceblue"} boxShadow={"0px 4px 4px rgba(0, 0, 0, 0.25)"} ml={"20px"} mt={"20px"} w={"120px"} onClick={openModal}>Adicionar</Button>
+     <Button bg={"#1d2757"} color={"aliceblue"} boxShadow={"0px 4px 4px rgba(0, 0, 0, 0.25)"}  mt={"20px"} w={"120px"} >Remover</Button>
+    </Flex>
 
     {isModalOpen && ( 
         <Flex
-            position={"fixed"}
+            
+            position={"absolute"}
             w={"100%"}
-            h={"100vh"}
+            h={"100%"}
             justifyContent={"center"}
             alignItems={"center"}
             bg={"rgba(0, 0, 0, 0.5)"}
             zIndex={1}
+            flexDirection={"column"}
+            gap={"20px"}
             
         >
-            <Flex
+        
+                <ModalCard closeModal={closeModal} />
+
+
             
-                
-                
-                justifyContent={"center"}
-                alignItems={"center"}
-                borderRadius={"20px"}
-                flexDirection={"column"}
-                gap={"20px"}
-            >
-                <ModalCard />
 
-
-               <Button onClick={closeModal}>Fechar</Button>
-
-            </Flex>
+        
+            
 
         </Flex>
      )

@@ -14,13 +14,13 @@ const Homepage = () => {
       <Flex w={"100%"} mt={"150px"} gap={"20px"} justifyContent={"center"} alignItems={"center"}
         flexDirection={{base:"column", md:"row"}}
       >
-        <Button bg="transparent" border={"1px solid aliceblue"} w={"200px"} onClick={() => navigate("/Planejamentocamarao")}>
-            <FaShrimp />
+        <Button color={"aliceblue"} bg="transparent" border={"1px solid aliceblue"} w={"200px"} onClick={() => navigate("/Planejamentocamarao")}>
+            <FaShrimp color="aliceblue" />
           Camarão
         </Button>
-        <Button bg="transparent" border={"1px solid aliceblue"} w={"200px"} onClick={() => navigate("/PlanejamentoTilapia")}>
+        <Button color={"aliceblue"} bg="transparent" border={"1px solid aliceblue"} w={"200px"} onClick={() => navigate("/PlanejamentoTilapia")}>
           
-          <FaFish />
+          <FaFish color="aliceblue" />
           Tilápia
         </Button>
       </Flex>

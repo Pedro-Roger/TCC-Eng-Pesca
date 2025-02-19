@@ -41,7 +41,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  background-color: #007bff;
+  background-color: #00000d;
   color: #fff;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -71,15 +71,15 @@ export const Table = styled.table`
 `;
 
 export const Th = styled.th`
-  border: 1px solid #ddd;
+  border: 1px solid #00000d;
   padding: 0.75rem;
-  background-color:rgb(210, 219, 232);
-  color: black;
+  background-color:#00000d;
+  color: aliceblue;
   font-weight: semibold;
 `;
 
 export const Td = styled.td`
-  border: 1px solid rgb(208, 220, 237);
+  border: 2px solid #00000d;
   padding: 0.75rem;
 `;
 

@@ -34,13 +34,12 @@ const Biometria = () => {
   const [data, setData] = useState<{ week: number; weight: number }[]>([]);
   const [editingWeek, setEditingWeek] = useState<number | null>(null);
 
-  // Carrega dados do localStorage ao inicializar
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("biometriaData") || "[]");
     setData(savedData);
   }, []);
 
-  // Salva dados no localStorage sempre que `data` muda
+
   useEffect(() => {
     localStorage.setItem("biometriaData", JSON.stringify(data));
   }, [data]);
@@ -139,13 +138,15 @@ const Biometria = () => {
           />
         </VStack>
 
-        <Button colorScheme="blue" onClick={handleAddData} mb={6}>
+        <Flex gap={4}>
+        <Button bg={"#00000d"} color={"aliceblue"} colorScheme="blue" onClick={handleAddData} mb={6}>
           {editingWeek !== null ? "Atualizar" : "Registrar"}
         </Button>
 
-        <Button colorScheme="red" onClick={handleResetData} mb={6}>
+        <Button bg={"#00000d"} color={"aliceblue"} colorScheme="red" onClick={handleResetData} mb={6}>
           Limpar Dados
         </Button>
+        </Flex>
 
         <Text fontSize="2xl" fontWeight="bold" mb={4}>
           Dados Registrados
@@ -211,7 +212,7 @@ const Biometria = () => {
           w="100%"
           maxW="650px"
           h="320px"
-          bg="rgba(255, 255, 255, 0.1)"
+          bg="#00000d "
           backdropFilter="blur(10px)"
           borderRadius="15px"
           boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
