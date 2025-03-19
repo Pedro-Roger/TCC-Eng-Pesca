@@ -1,8 +1,17 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Box, Button, Flex } from '@chakra-ui/react';
+import { To, useNavigate } from 'react-router-dom';
 
-const Menu = () => {
-  const navigate = useNavigate(); 
+interface MenuProps {
+  onClose: () => void;
+}
+
+const Menu = ({ onClose }: MenuProps) => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: To) => {
+    navigate(path);
+    onClose();
+  };
 
   return (
     <Flex flexDirection="column" bg="#11444A">
@@ -10,7 +19,7 @@ const Menu = () => {
         color="white"
         bg="transparent"
         h="60px"
-        onClick={() => navigate("/")} 
+        onClick={() => handleNavigation('/')}
       >
         Novo Projeto
       </Button>
@@ -20,7 +29,7 @@ const Menu = () => {
         color="white"
         bg="transparent"
         h="60px"
-        onClick={() => navigate("/ListaProjetos")} 
+        onClick={() => handleNavigation('/ListaProjetos')}
       >
         Lista de Projetos
       </Button>
@@ -30,7 +39,7 @@ const Menu = () => {
         color="white"
         bg="transparent"
         h="60px"
-        // onClick={() => navigate("/EmAndamento")} 
+        onClick={() => handleNavigation('/EmAndamento')}
       >
         Em Andamento
       </Button>
@@ -40,7 +49,7 @@ const Menu = () => {
         color="white"
         bg="transparent"
         h="60px"
-        onClick={() => navigate("/Biometria")} 
+        onClick={() => handleNavigation('/Biometria')}
       >
         Biometria
       </Button>
@@ -50,7 +59,7 @@ const Menu = () => {
         color="white"
         bg="transparent"
         h="60px"
-        onClick={() => navigate("/TabelaArracoamento")} 
+        onClick={() => handleNavigation('/TabelaArracoamento')}
       >
         Tabela de Arraçoamento
       </Button>
@@ -60,7 +69,7 @@ const Menu = () => {
         color="white"
         bg="transparent"
         h="60px"
-        // onClick={() => navigate("/Equipe")} 
+        onClick={() => handleNavigation('/Equipe')}
       >
         Equipe
       </Button>
