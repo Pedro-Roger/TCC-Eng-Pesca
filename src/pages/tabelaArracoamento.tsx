@@ -1,6 +1,6 @@
-import { useState } from "react";
-import * as S from "./tabelaStyled";
-import { Flex, Text } from "@chakra-ui/react";
+import { useState } from 'react';
+import * as S from './tabelaStyled';
+import { Flex, Text, useBreakpointValue, Box } from '@chakra-ui/react';
 
 type Tank = {
   name: string;
@@ -12,8 +12,8 @@ type Tank = {
 };
 
 const TabelaArracoamento = () => {
-  const [tanks, setTanks] = useState<Tank[]>([]); // Define o tipo Tank[]
-  const [currentTank, setCurrentTank] = useState("");
+  const [tanks, setTanks] = useState<Tank[]>([]);
+  const [currentTank, setCurrentTank] = useState('');
   const [numFish, setNumFish] = useState(0);
   const [avgWeight, setAvgWeight] = useState(0);
   const [feedingsPerDay, setFeedingsPerDay] = useState(1);
@@ -52,7 +52,7 @@ const TabelaArracoamento = () => {
 
   const addTank = () => {
     if (!currentTank || numFish <= 0 || avgWeight <= 0 || feedingsPerDay <= 0) {
-      alert("Please fill in all fields correctly.");
+      alert('Por favor, preencha todos os campos corretamente.');
       return;
     }
 
@@ -69,15 +69,17 @@ const TabelaArracoamento = () => {
       },
     ]);
 
-    setCurrentTank("");
+    setCurrentTank('');
     setNumFish(0);
     setAvgWeight(0);
     setFeedingsPerDay(1);
   };
 
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
     <S.Container>
-      <Text fontSize="2xl" fontWeight="bold" mb="2rem">
+      <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold" mb="2rem">
         Tabela de Arraçoamento
       </Text>
 
@@ -102,12 +104,12 @@ const TabelaArracoamento = () => {
           />
         </S.InputContainer>
         <S.InputContainer>
-          <S.Label>Numero de peixes:</S.Label>
+          <S.Label>Número de peixes:</S.Label>
           <S.Input
             type="number"
             value={numFish}
             onChange={(e) => setNumFish(Number(e.target.value))}
-            placeholder="Enter number of fish"
+            placeholder=""
           />
         </S.InputContainer>
         <S.InputContainer>
@@ -116,16 +118,16 @@ const TabelaArracoamento = () => {
             type="number"
             value={avgWeight}
             onChange={(e) => setAvgWeight(Number(e.target.value))}
-            placeholder="Enter average weight of fish"
+            placeholder=""
           />
         </S.InputContainer>
         <S.InputContainer>
-          <S.Label>tratos por dia :</S.Label>
+          <S.Label>Tratos por dia:</S.Label>
           <S.Input
             type="number"
             value={feedingsPerDay}
             onChange={(e) => setFeedingsPerDay(Number(e.target.value))}
-            placeholder="Enter number of feedings"
+            placeholder=""
           />
         </S.InputContainer>
       </Flex>
@@ -133,32 +135,68 @@ const TabelaArracoamento = () => {
       <S.Button onClick={addTank}>Adicionar Tanque</S.Button>
 
       <S.TableContainer>
-        <S.TableTitle>Tabela </S.TableTitle>
+        <S.TableTitle>Tabela</S.TableTitle>
         {tanks.length > 0 ? (
-          <S.Table>
-            <thead>
-              <tr>
-                <S.Th>Nome do Tanque</S.Th>
-                <S.Th>Número de Peixes</S.Th>
-                <S.Th>Peso Médio (g)</S.Th>
-                <S.Th>Alimentações/Dia</S.Th>
-                <S.Th>Ração Diária (g)</S.Th>
-                <S.Th>Ração por Alimentação (g)</S.Th>
-              </tr>
-            </thead>
-            <tbody>
+          isMobile ? (
+            // Layout para mobile (cartões)
+            <Flex direction="column" gap="1rem">
               {tanks.map((tank, index) => (
-                <tr key={index}>
-                  <S.Td>{tank.name}</S.Td>
-                  <S.Td>{tank.numFish}</S.Td>
-                  <S.Td>{tank.avgWeight}</S.Td>
-                  <S.Td>{tank.feedingsPerDay}</S.Td>
-                  <S.Td>{tank.dailyFeedingRate} g</S.Td>
-                  <S.Td>{tank.feedPerFeeding} g</S.Td>
-                </tr>
+                <Box
+                  key={index}
+                  border="1px solid"
+                  borderColor="gray.200"
+                  borderRadius="md"
+                  p="1rem"
+                >
+                  <Text>
+                    <strong>Nome do Tanque:</strong> {tank.name}
+                  </Text>
+                  <Text>
+                    <strong>Número de Peixes:</strong> {tank.numFish}
+                  </Text>
+                  <Text>
+                    <strong>Peso Médio (g):</strong> {tank.avgWeight}
+                  </Text>
+                  <Text>
+                    <strong>Alimentações/Dia:</strong> {tank.feedingsPerDay}
+                  </Text>
+                  <Text>
+                    <strong>Ração Diária (g):</strong> {tank.dailyFeedingRate} g
+                  </Text>
+                  <Text>
+                    <strong>Ração por Alimentação (g):</strong>{' '}
+                    {tank.feedPerFeeding} g
+                  </Text>
+                </Box>
               ))}
-            </tbody>
-          </S.Table>
+            </Flex>
+          ) : (
+            // Layout para desktop (tabela)
+            <S.Table>
+              <thead>
+                <tr>
+                  <S.Th>Nome do Tanque</S.Th>
+                  <S.Th>Número de Peixes</S.Th>
+                  <S.Th>Peso Médio (g)</S.Th>
+                  <S.Th>Alimentações/Dia</S.Th>
+                  <S.Th>Ração Diária (g)</S.Th>
+                  <S.Th>Ração por Alimentação (g)</S.Th>
+                </tr>
+              </thead>
+              <tbody>
+                {tanks.map((tank, index) => (
+                  <tr key={index}>
+                    <S.Td>{tank.name}</S.Td>
+                    <S.Td>{tank.numFish}</S.Td>
+                    <S.Td>{tank.avgWeight}</S.Td>
+                    <S.Td>{tank.feedingsPerDay}</S.Td>
+                    <S.Td>{tank.dailyFeedingRate} g</S.Td>
+                    <S.Td>{tank.feedPerFeeding} g</S.Td>
+                  </tr>
+                ))}
+              </tbody>
+            </S.Table>
+          )
         ) : (
           <S.NoData>
             Nenhum tanque cadastrado. Por favor, adicione um tanque.

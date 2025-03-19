@@ -1,15 +1,16 @@
-import  { useState, useEffect } from "react";
-import { GiFlour, GiMountainCave, GiWeight } from "react-icons/gi";
-import { PiShrimpFill } from "react-icons/pi";
+import { useState, useEffect } from 'react';
+import { GiFlour, GiMountainCave, GiWeight } from 'react-icons/gi';
+import { PiShrimpFill } from 'react-icons/pi';
 import {
   FaCalculator,
   FaClock,
   FaWeightHanging,
   FaWeightScale,
-} from "react-icons/fa6";
-import * as S from "./StyledInputs";
-import { Button, Flex } from "@chakra-ui/react";
-import { useProjetos } from "../context/ProjetosContext"; 
+} from 'react-icons/fa6';
+import * as S from './StyledInputs';
+import { Button, Flex, Heading } from '@chakra-ui/react';
+import { useProjetos } from '../context/ProjetosContext';
+
 
 const PlanejamentoCamarao = () => {
   const [areaVolume, setAreaVolume] = useState<number>(0);
@@ -21,7 +22,7 @@ const PlanejamentoCamarao = () => {
   const [quantidadeSacas, setQuantidadeSacas] = useState<number>(0);
   const [densidade, setDensidade] = useState<number>(0);
 
-  const { adicionarProjeto} = useProjetos(); 
+  const { adicionarProjeto } = useProjetos();
 
   const calcularPlanejamento = () => {
     const qtdAnimais = pesoTotalDesejado / (pesoMedioDesejado / 1000);
@@ -46,18 +47,24 @@ const PlanejamentoCamarao = () => {
     ) {
       calcularPlanejamento();
     }
-  }, [areaVolume, pesoMedioDesejado, pesoTotalDesejado, fcaEstimado, calcularPlanejamento]);
+  }, [
+    areaVolume,
+    pesoMedioDesejado,
+    pesoTotalDesejado,
+    fcaEstimado,
+    calcularPlanejamento,
+  ]);
 
   const handleInputChange = (field: string, value: string) => {
     const parsedValue = parseFloat(value) || 0;
 
-    if (field === "areaVolume") {
+    if (field === 'areaVolume') {
       setAreaVolume(parsedValue);
-    } else if (field === "pesoTotalDesejado") {
+    } else if (field === 'pesoTotalDesejado') {
       setPesoTotalDesejado(parsedValue);
-    } else if (field === "pesoMedioDesejado") {
+    } else if (field === 'pesoMedioDesejado') {
       setPesoMedioDesejado(parsedValue);
-    } else if (field === "fcaEstimado") {
+    } else if (field === 'fcaEstimado') {
       setFcaEstimado(parsedValue);
     }
   };
@@ -65,7 +72,7 @@ const PlanejamentoCamarao = () => {
   const handleSave = () => {
     const novoProjeto = {
       id: new Date().getTime(),
-      tipo: "camarão",
+      tipo: 'camarão',
       area: areaVolume,
       pesoTotal: pesoTotalDesejado,
       pesoMedio: pesoMedioDesejado,
@@ -77,7 +84,7 @@ const PlanejamentoCamarao = () => {
     };
 
     adicionarProjeto(novoProjeto);
-    alert("Projeto salvo com sucesso!");
+    alert('Projeto salvo com sucesso!');
   };
 
   return (
@@ -89,30 +96,27 @@ const PlanejamentoCamarao = () => {
         handleSave();
       }}
     >
-      <h1
-        style={{
-          fontSize: "40px",
-          color: "aliceblue",
-          fontWeight: 400,
-          marginLeft: "150px",
-          marginTop: "10px",
-        }}
+      <Heading
+        as="h1"
+        fontSize={{ base: '25px', lg: '30px' }}
+        color="aliceblue"
+        fontWeight={700}
+        textAlign={'center'}
+        marginTop="30px"
       >
         Planejamento Camarão
-      </h1>
+      </Heading>
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          padding: "100px",
-          marginLeft: "50px",
-          gap: "50px",
-        }}
+      <Flex
+        display="flex"
+        flexWrap="wrap"
+        padding="100px"
+        justifyContent="center"
+        gap="50px"
       >
         <S.StyledBox>
           <S.IconWrapper>
-            <GiMountainCave size={40} color={"aliceblue"} />
+            <GiMountainCave size={40} color={'aliceblue'} />
           </S.IconWrapper>
           <div>
             <S.LabelTextArea>Área do Viveiro (m2) </S.LabelTextArea>
@@ -120,14 +124,14 @@ const PlanejamentoCamarao = () => {
               placeholder="Digite aqui"
               type="number"
               value={areaVolume}
-              onChange={(e) => handleInputChange("areaVolume", e.target.value)}
+              onChange={(e) => handleInputChange('areaVolume', e.target.value)}
             />
           </div>
         </S.StyledBox>
 
         <S.StyledBox>
           <S.IconWrapper>
-            <FaWeightHanging size={40} color={"aliceblue"} />
+            <FaWeightHanging size={40} color={'aliceblue'} />
           </S.IconWrapper>
           <div>
             <S.LabelTextPesoTotal>
@@ -138,7 +142,7 @@ const PlanejamentoCamarao = () => {
               type="number"
               value={pesoTotalDesejado}
               onChange={(e) =>
-                handleInputChange("pesoTotalDesejado", e.target.value)
+                handleInputChange('pesoTotalDesejado', e.target.value)
               }
             />
           </div>
@@ -146,7 +150,7 @@ const PlanejamentoCamarao = () => {
 
         <S.StyledBox>
           <S.IconWrapper>
-            <FaWeightScale size={40} color={"aliceblue"} />
+            <FaWeightScale size={40} color={'aliceblue'} />
           </S.IconWrapper>
           <div>
             <S.LabelTextPesoMedio>Peso Médio Desejado (g)</S.LabelTextPesoMedio>
@@ -155,7 +159,7 @@ const PlanejamentoCamarao = () => {
               type="number"
               value={pesoMedioDesejado}
               onChange={(e) =>
-                handleInputChange("pesoMedioDesejado", e.target.value)
+                handleInputChange('pesoMedioDesejado', e.target.value)
               }
             />
           </div>
@@ -163,7 +167,7 @@ const PlanejamentoCamarao = () => {
 
         <S.StyledBox>
           <S.IconWrapper>
-            <FaCalculator size={40} color={"aliceblue"} />
+            <FaCalculator size={40} color={'aliceblue'} />
           </S.IconWrapper>
           <div>
             <S.LabelTextFca>FCA Estimado</S.LabelTextFca>
@@ -171,14 +175,14 @@ const PlanejamentoCamarao = () => {
               placeholder="Digite aqui"
               type="number"
               value={fcaEstimado}
-              onChange={(e) => handleInputChange("fcaEstimado", e.target.value)}
+              onChange={(e) => handleInputChange('fcaEstimado', e.target.value)}
             />
           </div>
         </S.StyledBox>
 
         <S.StyledBox>
           <S.IconWrapper>
-            <PiShrimpFill size={40} color={"aliceblue"} />
+            <PiShrimpFill size={40} color={'aliceblue'} />
           </S.IconWrapper>
           <div>
             <S.LabelTextQtdA>Quantidade de Animais</S.LabelTextQtdA>
@@ -193,7 +197,7 @@ const PlanejamentoCamarao = () => {
 
         <S.StyledBox>
           <S.IconWrapper>
-            <GiFlour size={40} color={"aliceblue"} />
+            <GiFlour size={40} color={'aliceblue'} />
           </S.IconWrapper>
           <div>
             <S.LabelTextQtdR>Quantidade de Ração (kg)</S.LabelTextQtdR>
@@ -208,7 +212,7 @@ const PlanejamentoCamarao = () => {
 
         <S.StyledBox>
           <S.IconWrapper>
-            <GiWeight size={40} color={"aliceblue"} />
+            <GiWeight size={40} color={'aliceblue'} />
           </S.IconWrapper>
           <div>
             <S.LabelTextQtdS>Quantidade de Sacas (25kg)</S.LabelTextQtdS>
@@ -223,7 +227,7 @@ const PlanejamentoCamarao = () => {
 
         <S.StyledBox>
           <S.IconWrapper>
-            <FaClock size={40} color={"aliceblue"} />
+            <FaClock size={40} color={'aliceblue'} />
           </S.IconWrapper>
           <div>
             <S.LabelTextDensidade>Densidade (animais/m²)</S.LabelTextDensidade>
@@ -235,20 +239,21 @@ const PlanejamentoCamarao = () => {
             />
           </div>
         </S.StyledBox>
-      </div>
+      </Flex>
 
       <Button
         type="submit"
-        w={"164px"}
-        h={"50px"}
-        bg={"transparent"}
-        color={"aliceblue"}
-        border={"1px solid aliceblue"}
-        _hover={{ bg: "aliceblue", color: "black" }}
-        ml={"150px"}
-        mt={"-60px"}
-        fontSize={"16px"}
-        fontWeight={"bold"}
+        w={'164px'}
+        h={'50px'}
+        bg={'transparent'}
+        color={'aliceblue'}
+        border={'1px solid aliceblue'}
+        _hover={{ bg: 'aliceblue', color: 'black' }}
+        ml={{ base: '0px', md: '150px' }}
+        mt={'-60px'}
+        fontSize={'16px'}
+        fontWeight={'bold'}
+        alignSelf={{ base: 'center', md: '' }}
       >
         Salvar
       </Button>

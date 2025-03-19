@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
     * {
@@ -34,3 +34,14 @@ export const GlobalStyles = createGlobalStyle`
     }
 `;
 
+export const TituloStyle = styled.h1`
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+
+  @media (max-width: 390px) {
+    font-size: 25px;
+    margin-top: 30px;
+  }
+`;

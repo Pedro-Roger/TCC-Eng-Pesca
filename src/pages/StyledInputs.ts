@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledInput = styled.input`
   border: none;
@@ -9,15 +9,14 @@ export const StyledInput = styled.input`
   border-radius: 4px;
   background-color: transparent;
   color: aliceblue;
-  &[type="number"] {
-    -moz-appearance: textfield; 
-    -webkit-appearance: none; 
+  &[type='number'] {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
     appearance: none;
   }
 
-  
-  &[type="number"]::-webkit-inner-spin-button,
-  &[type="number"]::-webkit-outer-spin-button {
+  &[type='number']::-webkit-inner-spin-button,
+  &[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
@@ -30,13 +29,11 @@ export const StyledInput = styled.input`
     padding: 12px;
   }
 
-
   @media (max-width: 1920px) {
     font-size: 15px;
     padding: 10px;
   }
 
- 
   @media (max-width: 1400px) {
     font-size: 13px;
     padding: 7px;
@@ -44,8 +41,6 @@ export const StyledInput = styled.input`
 
   @media (max-width: 1600px) {
     font-size: 13px;
-    
-    
   }
 
   @media (max-width: 768px) {
@@ -70,8 +65,6 @@ export const StyledBox = styled.div`
   display: flex;
   position: relative;
 
-  
-
   @media (max-width: 2560px) {
     width: 320px;
     height: 110px;
@@ -90,7 +83,6 @@ export const StyledBox = styled.div`
   @media (max-width: 1600px) {
     width: 260px;
     height: 90px;
-    
   }
 
   @media (max-width: 768px) {
@@ -155,8 +147,6 @@ export const LabelTextArea = styled.p`
   white-space: nowrap;
   text-align: center;
 
- 
-
   @media (max-width: 2560px) {
     font-size: 16px;
     transform: translate(67%, 50%);
@@ -168,8 +158,6 @@ export const LabelTextArea = styled.p`
     left: -31%;
   }
 
- 
-
   @media (max-width: 1600px) {
     font-size: 14px;
   }
@@ -177,9 +165,7 @@ export const LabelTextArea = styled.p`
   @media (max-width: 1400px) {
     font-size: 13px;
     transform: translate(60%, 50%);
-    
   }
-
 
   @media (max-width: 768px) {
     font-size: 12px;
@@ -188,9 +174,10 @@ export const LabelTextArea = styled.p`
   }
 
   @media (max-width: 480px) {
-    font-size: 10px;
-    top: -45%;
-    transform: translate(55%, 50%);
+    font-size: 20px;
+    top: -70%;
+    left: -60%;
+    transform: translate(60%, 50%);
   }
 `;
 
@@ -203,8 +190,6 @@ export const LabelTextPesoTotal = styled.p`
   white-space: nowrap;
   text-align: center;
 
- 
-
   @media (max-width: 2560px) {
     font-size: 16px;
     transform: translate(67%, 50%);
@@ -216,8 +201,6 @@ export const LabelTextPesoTotal = styled.p`
     left: -36%;
   }
 
- 
-
   @media (max-width: 1600px) {
     font-size: 14px;
   }
@@ -225,9 +208,7 @@ export const LabelTextPesoTotal = styled.p`
   @media (max-width: 1400px) {
     font-size: 13px;
     transform: translate(60%, 50%);
-    
   }
-
 
   @media (max-width: 768px) {
     font-size: 12px;
@@ -236,9 +217,10 @@ export const LabelTextPesoTotal = styled.p`
   }
 
   @media (max-width: 480px) {
-    font-size: 10px;
-    top: -45%;
-    transform: translate(55%, 50%);
+    font-size: 20px;
+    top: -70%;
+    left: -75%;
+    transform: translate(60%, 50%);
   }
 `;
 
@@ -251,8 +233,6 @@ export const LabelTextPesoMedio = styled.p`
   white-space: nowrap;
   text-align: center;
 
- 
-
   @media (max-width: 2560px) {
     font-size: 16px;
     transform: translate(67%, 50%);
@@ -264,8 +244,6 @@ export const LabelTextPesoMedio = styled.p`
     left: -36%;
   }
 
- 
-
   @media (max-width: 1600px) {
     font-size: 14px;
     left: -40%;
@@ -274,9 +252,7 @@ export const LabelTextPesoMedio = styled.p`
   @media (max-width: 1400px) {
     font-size: 13px;
     transform: translate(60%, 50%);
-    
   }
-
 
   @media (max-width: 768px) {
     font-size: 12px;
@@ -285,12 +261,12 @@ export const LabelTextPesoMedio = styled.p`
   }
 
   @media (max-width: 480px) {
-    font-size: 10px;
-    top: -45%;
-    transform: translate(55%, 50%);
+    font-size: 20px;
+    top: -70%;
+    left: -75%;
+    transform: translate(60%, 50%);
   }
 `;
-
 
 export const LabelTextFca = styled.p`
   position: absolute;
@@ -301,8 +277,6 @@ export const LabelTextFca = styled.p`
   white-space: nowrap;
   text-align: center;
 
- 
-
   @media (max-width: 2560px) {
     font-size: 16px;
     transform: translate(67%, 50%);
@@ -311,23 +285,18 @@ export const LabelTextFca = styled.p`
   @media (max-width: 1920px) {
     font-size: 15px;
     transform: translate(65%, 50%);
-    left:-50px;
+    left: -50px;
   }
-
- 
 
   @media (max-width: 1600px) {
     font-size: 14px;
     left: -22%;
-    
   }
 
   @media (max-width: 1400px) {
     font-size: 13px;
     transform: translate(60%, 50%);
-    
   }
-
 
   @media (max-width: 768px) {
     font-size: 12px;
@@ -336,9 +305,10 @@ export const LabelTextFca = styled.p`
   }
 
   @media (max-width: 480px) {
-    font-size: 10px;
-    top: -45%;
-    transform: translate(55%, 50%);
+    font-size: 20px;
+    top: -70%;
+    left: -40%;
+    transform: translate(60%, 50%);
   }
 `;
 
@@ -351,8 +321,6 @@ export const LabelTextQtdA = styled.p`
   white-space: nowrap;
   text-align: center;
 
- 
-
   @media (max-width: 2560px) {
     font-size: 16px;
     transform: translate(67%, 50%);
@@ -364,8 +332,6 @@ export const LabelTextQtdA = styled.p`
     left: -36%;
   }
 
- 
-
   @media (max-width: 1600px) {
     font-size: 14px;
   }
@@ -373,9 +339,7 @@ export const LabelTextQtdA = styled.p`
   @media (max-width: 1400px) {
     font-size: 13px;
     transform: translate(60%, 50%);
-    
   }
-
 
   @media (max-width: 768px) {
     font-size: 12px;
@@ -384,9 +348,10 @@ export const LabelTextQtdA = styled.p`
   }
 
   @media (max-width: 480px) {
-    font-size: 10px;
-    top: -45%;
-    transform: translate(55%, 50%);
+    font-size: 20px;
+    top: -70%;
+    left: -68%;
+    transform: translate(60%, 50%);
   }
 `;
 
@@ -399,8 +364,6 @@ export const LabelTextQtdR = styled.p`
   white-space: nowrap;
   text-align: center;
 
- 
-
   @media (max-width: 2560px) {
     font-size: 16px;
     transform: translate(67%, 50%);
@@ -412,8 +375,6 @@ export const LabelTextQtdR = styled.p`
     left: -36%;
   }
 
- 
-
   @media (max-width: 1600px) {
     font-size: 14px;
     left: -42%;
@@ -422,9 +383,7 @@ export const LabelTextQtdR = styled.p`
   @media (max-width: 1400px) {
     font-size: 13px;
     transform: translate(60%, 50%);
-    
   }
-
 
   @media (max-width: 768px) {
     font-size: 12px;
@@ -433,9 +392,10 @@ export const LabelTextQtdR = styled.p`
   }
 
   @media (max-width: 480px) {
-    font-size: 10px;
-    top: -45%;
-    transform: translate(55%, 50%);
+    font-size: 20px;
+    top: -70%;
+    left: -78%;
+    transform: translate(60%, 50%);
   }
 `;
 
@@ -448,8 +408,6 @@ export const LabelTextQtdS = styled.p`
   white-space: nowrap;
   text-align: center;
 
- 
-
   @media (max-width: 2560px) {
     font-size: 16px;
     transform: translate(67%, 50%);
@@ -461,8 +419,6 @@ export const LabelTextQtdS = styled.p`
     left: -36%;
   }
 
- 
-
   @media (max-width: 1600px) {
     font-size: 14px;
     left: -44%;
@@ -471,9 +427,7 @@ export const LabelTextQtdS = styled.p`
   @media (max-width: 1400px) {
     font-size: 13px;
     transform: translate(60%, 50%);
-    
   }
-
 
   @media (max-width: 768px) {
     font-size: 12px;
@@ -482,9 +436,10 @@ export const LabelTextQtdS = styled.p`
   }
 
   @media (max-width: 480px) {
-    font-size: 10px;
-    top: -45%;
-    transform: translate(55%, 50%);
+    font-size: 20px;
+    top: -70%;
+    left: -83%;
+    transform: translate(60%, 50%);
   }
 `;
 
@@ -497,8 +452,6 @@ export const LabelTextDensidade = styled.p`
   white-space: nowrap;
   text-align: center;
 
- 
-
   @media (max-width: 2560px) {
     font-size: 16px;
     transform: translate(67%, 50%);
@@ -510,8 +463,6 @@ export const LabelTextDensidade = styled.p`
     left: -36%;
   }
 
- 
-
   @media (max-width: 1600px) {
     font-size: 14px;
   }
@@ -519,9 +470,7 @@ export const LabelTextDensidade = styled.p`
   @media (max-width: 1400px) {
     font-size: 13px;
     transform: translate(60%, 50%);
-    
   }
-
 
   @media (max-width: 768px) {
     font-size: 12px;
@@ -530,8 +479,9 @@ export const LabelTextDensidade = styled.p`
   }
 
   @media (max-width: 480px) {
-    font-size: 10px;
-    top: -45%;
-    transform: translate(55%, 50%);
+    font-size: 20px;
+    top: -70%;
+    left: -68%;
+    transform: translate(60%, 50%);
   }
 `;
