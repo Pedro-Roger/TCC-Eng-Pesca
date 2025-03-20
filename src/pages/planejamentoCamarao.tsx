@@ -1,16 +1,11 @@
 import { useState, useEffect } from 'react';
 import { GiFlour, GiMountainCave, GiWeight } from 'react-icons/gi';
 import { PiShrimpFill } from 'react-icons/pi';
-import {
-  FaCalculator,
-  FaClock,
-  FaWeightHanging,
-  FaWeightScale,
-} from 'react-icons/fa6';
-import * as S from './StyledInputs';
-import { Button, Flex, Heading } from '@chakra-ui/react';
-import { useProjetos } from '../context/ProjetosContext';
+import { FaCalculator, FaWeightHanging, FaWeightScale } from 'react-icons/fa6';
 
+import { Button, Flex, Heading, Box, Text, Input } from '@chakra-ui/react';
+import { useProjetos } from '../context/ProjetosContext';
+import { BiLayer } from 'react-icons/bi';
 
 const PlanejamentoCamarao = () => {
   const [areaVolume, setAreaVolume] = useState<number>(0);
@@ -24,6 +19,7 @@ const PlanejamentoCamarao = () => {
 
   const { adicionarProjeto } = useProjetos();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const calcularPlanejamento = () => {
     const qtdAnimais = pesoTotalDesejado / (pesoMedioDesejado / 1000);
     setQuantidadeAnimais(qtdAnimais);
@@ -108,137 +104,103 @@ const PlanejamentoCamarao = () => {
       </Heading>
 
       <Flex
-        display="flex"
         flexWrap="wrap"
-        padding="100px"
+        padding={{ base: '30px', lg: '100px' }}
         justifyContent="center"
-        gap="50px"
+        gap="20px"
       >
-        <S.StyledBox>
-          <S.IconWrapper>
-            <GiMountainCave size={40} color={'aliceblue'} />
-          </S.IconWrapper>
-          <div>
-            <S.LabelTextArea>Área do Viveiro (m2) </S.LabelTextArea>
-            <S.StyledInput
-              placeholder="Digite aqui"
-              type="number"
-              value={areaVolume}
-              onChange={(e) => handleInputChange('areaVolume', e.target.value)}
-            />
-          </div>
-        </S.StyledBox>
-
-        <S.StyledBox>
-          <S.IconWrapper>
-            <FaWeightHanging size={40} color={'aliceblue'} />
-          </S.IconWrapper>
-          <div>
-            <S.LabelTextPesoTotal>
-              Peso Total Desejado (kg)
-            </S.LabelTextPesoTotal>
-            <S.StyledInput
-              placeholder="Digite aqui"
-              type="number"
-              value={pesoTotalDesejado}
-              onChange={(e) =>
-                handleInputChange('pesoTotalDesejado', e.target.value)
-              }
-            />
-          </div>
-        </S.StyledBox>
-
-        <S.StyledBox>
-          <S.IconWrapper>
-            <FaWeightScale size={40} color={'aliceblue'} />
-          </S.IconWrapper>
-          <div>
-            <S.LabelTextPesoMedio>Peso Médio Desejado (g)</S.LabelTextPesoMedio>
-            <S.StyledInput
-              placeholder="Digite aqui"
-              type="number"
-              value={pesoMedioDesejado}
-              onChange={(e) =>
-                handleInputChange('pesoMedioDesejado', e.target.value)
-              }
-            />
-          </div>
-        </S.StyledBox>
-
-        <S.StyledBox>
-          <S.IconWrapper>
-            <FaCalculator size={40} color={'aliceblue'} />
-          </S.IconWrapper>
-          <div>
-            <S.LabelTextFca>FCA Estimado</S.LabelTextFca>
-            <S.StyledInput
-              placeholder="Digite aqui"
-              type="number"
-              value={fcaEstimado}
-              onChange={(e) => handleInputChange('fcaEstimado', e.target.value)}
-            />
-          </div>
-        </S.StyledBox>
-
-        <S.StyledBox>
-          <S.IconWrapper>
-            <PiShrimpFill size={40} color={'aliceblue'} />
-          </S.IconWrapper>
-          <div>
-            <S.LabelTextQtdA>Quantidade de Animais</S.LabelTextQtdA>
-            <S.StyledInput
-              placeholder="Calculado automaticamente"
-              type="number"
-              value={quantidadeAnimais}
-              readOnly
-            />
-          </div>
-        </S.StyledBox>
-
-        <S.StyledBox>
-          <S.IconWrapper>
-            <GiFlour size={40} color={'aliceblue'} />
-          </S.IconWrapper>
-          <div>
-            <S.LabelTextQtdR>Quantidade de Ração (kg)</S.LabelTextQtdR>
-            <S.StyledInput
-              placeholder="Calculado automaticamente"
-              type="number"
-              value={quantidadeRacao}
-              readOnly
-            />
-          </div>
-        </S.StyledBox>
-
-        <S.StyledBox>
-          <S.IconWrapper>
-            <GiWeight size={40} color={'aliceblue'} />
-          </S.IconWrapper>
-          <div>
-            <S.LabelTextQtdS>Quantidade de Sacas (25kg)</S.LabelTextQtdS>
-            <S.StyledInput
-              placeholder="Calculado automaticamente"
-              type="number"
-              value={quantidadeSacas}
-              readOnly
-            />
-          </div>
-        </S.StyledBox>
-
-        <S.StyledBox>
-          <S.IconWrapper>
-            <FaClock size={40} color={'aliceblue'} />
-          </S.IconWrapper>
-          <div>
-            <S.LabelTextDensidade>Densidade (animais/m²)</S.LabelTextDensidade>
-            <S.StyledInput
-              placeholder="Calculado automaticamente"
-              type="number"
-              value={densidade}
-              readOnly
-            />
-          </div>
-        </S.StyledBox>
+        {[
+          {
+            icon: <GiMountainCave size={40} color={'aliceblue'} />,
+            label: 'Área do Viveiro (m2)',
+            value: areaVolume,
+            onChange: (e: { target: { value: string } }) =>
+              handleInputChange('areaVolume', e.target.value),
+          },
+          {
+            icon: <FaWeightHanging size={40} color={'aliceblue'} />,
+            label: 'Peso Total Desejado (kg)',
+            value: pesoTotalDesejado,
+            onChange: (e: { target: { value: string } }) =>
+              handleInputChange('pesoTotalDesejado', e.target.value),
+          },
+          {
+            icon: <FaWeightScale size={40} color={'aliceblue'} />,
+            label: 'Peso Médio Desejado (g)',
+            value: pesoMedioDesejado,
+            onChange: (e: { target: { value: string } }) =>
+              handleInputChange('pesoMedioDesejado', e.target.value),
+          },
+          {
+            icon: <FaCalculator size={40} color={'aliceblue'} />,
+            label: 'FCA Estimado',
+            value: fcaEstimado,
+            onChange: (e: { target: { value: string } }) =>
+              handleInputChange('fcaEstimado', e.target.value),
+          },
+          {
+            icon: <PiShrimpFill size={40} color={'aliceblue'} />,
+            label: 'Quantidade de Animais',
+            value: quantidadeAnimais,
+            readOnly: true,
+          },
+          {
+            icon: <GiFlour size={40} color={'aliceblue'} />,
+            label: 'Quantidade de Ração (kg)',
+            value: quantidadeRacao,
+            readOnly: true,
+          },
+          {
+            icon: <GiWeight size={40} color={'aliceblue'} />,
+            label: 'Quantidade de Sacas',
+            value: quantidadeSacas,
+            readOnly: true,
+          },
+          {
+            icon: <BiLayer size={40} color={'aliceblue'} />,
+            label: 'Densidade (animais/m²)',
+            value: densidade,
+            readOnly: true,
+          },
+        ].map((item, index) => (
+          <Box
+            key={index}
+            flex={{ base: '1 1 calc(50% - 10px)', md: '1 1 calc(25% - 20px)' }}
+            maxWidth={{ base: 'calc(50% - 10px)', md: 'calc(25% - 20px)' }}
+          >
+            <Text
+              fontSize={{ base: '12px', md: '16px' }}
+              fontWeight="bold"
+              color="aliceblue"
+              mb="8px"
+            >
+              {item.label}
+            </Text>
+            <Flex
+              bg="#00000d"
+              color="aliceblue"
+              borderRadius="8px"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              padding="10px"
+              alignItems="center"
+            >
+              <Box mr="10px">{item.icon}</Box>
+              <Input
+                placeholder={
+                  item.readOnly ? 'Calculado automaticamente' : 'Digite aqui'
+                }
+                type="number"
+                value={item.value}
+                onChange={item.onChange}
+                readOnly={item.readOnly}
+                flex={1}
+                border="none"
+                _focus={{ boxShadow: 'none' }}
+                color="aliceblue"
+              />
+            </Flex>
+          </Box>
+        ))}
       </Flex>
 
       <Button
@@ -250,7 +212,7 @@ const PlanejamentoCamarao = () => {
         border={'1px solid aliceblue'}
         _hover={{ bg: 'aliceblue', color: 'black' }}
         ml={{ base: '0px', md: '150px' }}
-        mt={'-60px'}
+        mt={'30px'}
         fontSize={'16px'}
         fontWeight={'bold'}
         alignSelf={{ base: 'center', md: '' }}

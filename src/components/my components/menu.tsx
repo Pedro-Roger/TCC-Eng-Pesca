@@ -14,7 +14,7 @@ const Menu = ({ onClose }: MenuProps) => {
   };
 
   return (
-    <Flex flexDirection="column" bg="#11444A">
+    <Flex flexDirection="column" bg="#091219">
       <Button
         color="white"
         bg="transparent"
@@ -23,7 +23,7 @@ const Menu = ({ onClose }: MenuProps) => {
       >
         Novo Projeto
       </Button>
-      <Box borderBottom="1px solid" borderColor="white.600" />
+      <Box borderBottom="1px solid" borderColor="#1a1f22" />
 
       <Button
         color="white"
@@ -33,7 +33,7 @@ const Menu = ({ onClose }: MenuProps) => {
       >
         Lista de Projetos
       </Button>
-      <Box borderBottom="1px solid" borderColor="white.600" />
+      <Box borderBottom="1px solid" borderColor="#1a1f22" />
 
       <Button
         color="white"
@@ -43,7 +43,7 @@ const Menu = ({ onClose }: MenuProps) => {
       >
         Em Andamento
       </Button>
-      <Box borderBottom="1px solid" borderColor="white.600" />
+      <Box borderBottom="1px solid" borderColor="#1a1f22" />
 
       <Button
         color="white"
@@ -53,7 +53,7 @@ const Menu = ({ onClose }: MenuProps) => {
       >
         Biometria
       </Button>
-      <Box borderBottom="1px solid" borderColor="white.600" />
+      <Box borderBottom="1px solid" borderColor="#1a1f22" />
 
       <Button
         color="white"
@@ -63,7 +63,7 @@ const Menu = ({ onClose }: MenuProps) => {
       >
         Tabela de Arraçoamento
       </Button>
-      <Box borderBottom="1px solid" borderColor="white.600" />
+      <Box borderBottom="1px solid" borderColor="#1a1f22" />
 
       <Button
         color="white"

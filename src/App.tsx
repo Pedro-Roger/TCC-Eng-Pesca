@@ -1,12 +1,12 @@
-import Paths from "./routes/paths";
-
+import { ProjetosProvider } from './context/ProjetosContext';
+import Paths from './routes/paths';
 
 const App = () => {
- 
-
   return (
     <>
-      <Paths />
+      <ProjetosProvider>
+        <Paths />
+      </ProjetosProvider>
     </>
   );
 };
