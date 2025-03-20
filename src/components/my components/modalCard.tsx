@@ -1,18 +1,28 @@
 import { Button, Flex, Text, Input, Image } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 
-const ModalCard = ({ closeModal, addCard }) => {
+interface ModalCardProps {
+  closeModal: () => void;
+  addCard: (newCard: {
+    name: string;
+    role: string;
+    age: string;
+    photo: string | null;
+  }) => void;
+}
+
+const ModalCard = ({ closeModal, addCard }: ModalCardProps) => {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [age, setAge] = useState('');
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState<string | null>(null);
 
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
+  const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPhoto(reader.result);
+        setPhoto(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
