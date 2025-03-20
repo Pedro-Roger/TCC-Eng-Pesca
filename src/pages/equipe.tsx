@@ -1,7 +1,9 @@
 import { Button, Flex, Text, Image } from '@chakra-ui/react';
 import ModalCard from '../components/my components/modalCard';
 import { useState, useEffect } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { Navigation, Pagination } from 'swiper/modules';
 
 interface Card {
   name: string;
@@ -13,7 +15,6 @@ interface Card {
 const Equipe = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cards, setCards] = useState<Card[]>([]);
-  const [emblaRef] = useEmblaCarousel({ loop: true });
 
   useEffect(() => {
     const savedCards = localStorage.getItem('cards');
@@ -48,9 +49,10 @@ const Equipe = () => {
 
   return (
     <Flex
-      w="100%"
-      minH="100vh"
-      flexDirection="column"
+      w={'100%'}
+      minH={'100vh'}
+      gap={'20px'}
+      flexDirection={'column'}
       p={['10px', '20px', '40px']}
       overflowX="hidden"
     >
@@ -58,12 +60,11 @@ const Equipe = () => {
         ml={['10px', '20px', '40px']}
         mt={['10px', '20px', '40px']}
         fontSize={['25px', '30px', '35px']}
-        color="aliceblue"
+        color={'aliceblue'}
       >
         Equipe
       </Text>
 
-     
       <Flex
         wrap="wrap"
         gap="20px"
@@ -79,14 +80,7 @@ const Equipe = () => {
             border="1px solid aliceblue"
             borderRadius="8px"
             p="20px"
-            minW="300%"
-            maxW="200px"
-            mx="auto"
-            gap={'20px'}
-            style={{
-              flex: '0 0 auto',
-              marginRight: index === cards.length - 1 ? '0px' : '20px',
-            }}
+            w="200px"
           >
             {card.photo && (
               <Image
@@ -119,7 +113,6 @@ const Equipe = () => {
         ))}
       </Flex>
 
-      
       <Flex
         display={['flex', 'flex', 'none']}
         w="100%"
@@ -127,18 +120,24 @@ const Equipe = () => {
         alignItems="center"
         px="20px"
       >
-        <div ref={emblaRef} style={{ overflow: 'hidden', width: '100%' }}>
-          <div style={{ display: 'flex' }}>
-            {cards.map((card, index) => (
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={20}
+          navigation
+          pagination={{ clickable: true }}
+          modules={[Navigation, Pagination]}
+          style={{ width: '100%', maxWidth: '300px' }}
+        >
+          {cards.map((card, index) => (
+            <SwiperSlide key={index}>
               <Flex
-                key={index}
                 direction="column"
                 align="center"
                 bg="linear-gradient(to bottom, #091219, #10243E)"
                 border="1px solid aliceblue"
                 borderRadius="8px"
                 p="20px"
-                minW="80%"
+                w="100%"
                 maxW="300px"
                 mx="auto"
               >
@@ -170,19 +169,19 @@ const Equipe = () => {
                   Remover
                 </Button>
               </Flex>
-            ))}
-          </div>
-        </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </Flex>
 
-      <Flex gap="20px">
+      <Flex gap={'20px'}>
         <Button
-          bg="#00000d"
-          color="aliceblue"
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+          bg={'#00000d'}
+          color={'aliceblue'}
+          boxShadow={'0px 4px 4px rgba(0, 0, 0, 0.25)'}
           ml={['10px', '20px']}
           mt={['10px', '20px']}
-          w="120px"
+          w={'120px'}
           onClick={openModal}
         >
           Adicionar
@@ -191,14 +190,14 @@ const Equipe = () => {
 
       {isModalOpen && (
         <Flex
-          position="fixed"
+          position={'fixed'}
           top={0}
           left={0}
-          w="100%"
-          h="100%"
-          justifyContent="center"
-          alignItems="center"
-          bg="rgba(0, 0, 0, 0.5)"
+          w={'100%'}
+          h={'100%'}
+          justifyContent={'center'}
+          alignItems={'center'}
+          bg={'rgba(0, 0, 0, 0.5)'}
           zIndex={1}
         >
           <ModalCard closeModal={closeModal} addCard={addCard} />
