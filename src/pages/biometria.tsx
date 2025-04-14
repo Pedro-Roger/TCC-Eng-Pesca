@@ -6,7 +6,6 @@ import {
   VStack,
   Text,
   Flex,
-  // useBreakpointValue,
 } from '@chakra-ui/react';
 import {
   LineChart,
@@ -42,8 +41,6 @@ const Biometria = () => {
   const [data, setData] = useState<{ week: number; weight: number }[]>([]);
   const [editingWeek, setEditingWeek] = useState<number | null>(null);
 
-  // const isMobile = useBreakpointValue({ base: true, md: false });
-
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem('biometriaData') || '[]');
     setData(savedData);
@@ -52,6 +49,25 @@ const Biometria = () => {
   useEffect(() => {
     localStorage.setItem('biometriaData', JSON.stringify(data));
   }, [data]);
+
+  // Função para combinar dados reais com o crescimento ideal
+  const getCombinedData = () => {
+    // Cria uma cópia dos dados ideais
+    const combined = [...idealGrowth];
+    
+    // Atualiza com os dados reais quando existirem
+    data.forEach(realEntry => {
+      const index = combined.findIndex(entry => entry.week === realEntry.week);
+      if (index !== -1) {
+        combined[index] = realEntry;
+      } else {
+        combined.push(realEntry);
+      }
+    });
+    
+    // Ordena por semana
+    return combined.sort((a, b) => a.week - b.week);
+  };
 
   const handleAddData = () => {
     if (!week || +week <= 0) {
@@ -92,7 +108,7 @@ const Biometria = () => {
     const entryToEdit = data.find((entry) => entry.week === weekToEdit);
     if (entryToEdit) {
       setWeek(entryToEdit.week);
-      setNumFish('1'); // Assume 1 peixe para simplificar
+      setNumFish('1');
       setTotalWeight(entryToEdit.weight.toString());
       setEditingWeek(weekToEdit);
     }
@@ -131,6 +147,8 @@ const Biometria = () => {
             value={week}
             onChange={(e) => setWeek(e.target.value)}
             placeholder="Digite a semana"
+            min="1"
+            max="24"
           />
 
           <Text fontWeight="bold">Quantidade de Peixes:</Text>
@@ -141,6 +159,7 @@ const Biometria = () => {
             value={numFish}
             onChange={(e) => setNumFish(e.target.value)}
             placeholder="Digite a quantidade de peixes"
+            min="1"
           />
 
           <Text fontWeight="bold">Peso Total (g):</Text>
@@ -151,6 +170,8 @@ const Biometria = () => {
             value={totalWeight}
             onChange={(e) => setTotalWeight(e.target.value)}
             placeholder="Digite o peso total"
+            min="0.1"
+            step="0.1"
           />
         </VStack>
 
@@ -243,17 +264,18 @@ const Biometria = () => {
           p={4}
         >
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart margin={{ top: 20, right: 30, left: 20, bottom: 30 }}>
-              <CartesianGrid stroke="#ccc" opacity={1} vertical={false} />
+            <LineChart
+              margin={{ top: 20, right: 30, left: 20, bottom: 30 }}
+              data={getCombinedData()}
+            >
+              <CartesianGrid stroke="#ccc" opacity={0.3} vertical={false} />
               <XAxis
-                tick={{ fill: 'white' }}
                 dataKey="week"
                 domain={[1, 24]}
-                type="category"
-                ticks={[
-                  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                  19, 20, 21, 22, 23, 24,
-                ]}
+                type="number"
+                tickCount={24}
+                tick={{ fill: 'white' }}
+                ticks={Array.from({ length: 24 }, (_, i) => i + 1)}
                 label={{
                   fill: 'white',
                   value: 'Semana',
@@ -271,10 +293,18 @@ const Biometria = () => {
                   position: 'insideLeft',
                 }}
               />
-              <Tooltip />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#00000d',
+                  borderColor: '#2C9CA9',
+                  borderRadius: '8px',
+                }}
+                itemStyle={{ color: 'white' }}
+                labelStyle={{ color: '#2C9CA9', fontWeight: 'bold' }}
+              />
               <Legend
                 iconType="line"
-                wrapperStyle={{ color: 'white' }}
+                wrapperStyle={{ color: 'white', paddingTop: '20px' }}
                 formatter={(value) => (
                   <span style={{ color: 'white' }}>{value}</span>
                 )}
@@ -287,15 +317,16 @@ const Biometria = () => {
                 strokeWidth={2}
                 name="Crescimento Ideal"
                 dot={false}
+                activeDot={{ r: 6 }}
               />
               <Line
                 type="monotone"
                 dataKey="weight"
-                data={data}
                 stroke="#82ca9d"
-                strokeWidth={2}
+                strokeWidth={3}
                 name="Crescimento Real"
-                dot={false}
+                dot={{ fill: '#82ca9d', r: 4, strokeWidth: 2 }}
+                activeDot={{ r: 8 }}
               />
             </LineChart>
           </ResponsiveContainer>
