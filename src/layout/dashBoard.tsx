@@ -14,7 +14,7 @@ const DashBoard = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         menuRef.current &&
-        !menuRef.current.contains(event.target as Node | null)
+        !menuRef.current.contains(event.target as Node)
       ) {
         setOpen(false);
       }
@@ -35,7 +35,12 @@ const DashBoard = () => {
         boxShadow={'0px 4px 4px rgba(0, 0, 0, 0.25)'}
       >
         <Flex align="center">
-          <img src={logo} alt="Logo SeaFlow" width={'120px'} height={'auto'} />
+          <img 
+            src={logo} 
+            alt="Logo SeaFlow" 
+            width={'120px'} 
+            height={'auto'} 
+          />
           <Text
             as={'h1'}
             fontSize={'23px'}
@@ -66,11 +71,9 @@ const DashBoard = () => {
       )}
 
       <Flex as={'nav'} flex={1}>
-        
         <Box display={{ base: 'none', md: 'block' }}>
           <SideBar />
         </Box>
-
        
         <Box flex={1}>
           <Outlet />

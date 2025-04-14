@@ -1,5 +1,4 @@
 import { Button, Flex, Text } from '@chakra-ui/react';
-import { Select } from '@chakra-ui/react';
 import { FaWeight } from 'react-icons/fa';
 
 const DashboardApp = () => {
