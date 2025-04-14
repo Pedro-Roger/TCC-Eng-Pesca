@@ -1,5 +1,10 @@
 import { Button, VStack } from '@chakra-ui/react';
-import { FiPlus } from 'react-icons/fi';
+import { FaHouse } from 'react-icons/fa6';
+import { FiPlusCircle } from 'react-icons/fi';
+import { FaTasks, FaUsers } from 'react-icons/fa';
+import { AiOutlineTable } from 'react-icons/ai';
+import { FaWeightScale } from 'react-icons/fa6';
+
 import { useNavigate } from 'react-router-dom';
 
 const SideBar = () => {
@@ -16,7 +21,7 @@ const SideBar = () => {
       <Button
         bg="none"
         color="aliceblue"
-        fontSize="20px"
+        fontSize="16px"
         mt={'10px'}
         justifyContent="flex-start"
         width="100%"
@@ -48,27 +53,34 @@ const SideBar = () => {
           bg={'none'}
           color={'aliceblue'}
           fontSize={'20px'}
-          border={'1px solid aliceblue'}
+          //
           borderRadius={'0px'}
           mb={'20px'}
           mt={'20px'}
           onClick={() => navigate('/')}
         >
+          <FiPlusCircle />
           Novo Projeto
-          <FiPlus />
         </Button>
-
+        <SidebarButton onClick={() => navigate('/DashBoard')}>
+          <FaHouse />
+          DashBoard
+        </SidebarButton>
         <SidebarButton onClick={() => navigate('/ListaProjetos')}>
+          <FaTasks />
           Lista de projetos
         </SidebarButton>
-        <SidebarButton>Em Andamento</SidebarButton>
+
         <SidebarButton onClick={() => navigate('/TabelaArracoamento')}>
+          <AiOutlineTable />
           Tabela de Arraçoamento
         </SidebarButton>
         <SidebarButton onClick={() => navigate('/Biometria')}>
+          <FaWeightScale />
           Biometria
         </SidebarButton>
         <SidebarButton onClick={() => navigate('/Equipe')}>
+          <FaUsers />
           Equipe
         </SidebarButton>
       </VStack>

@@ -8,6 +8,7 @@ import ListaProjetos from "../pages/listaProjetos";
 import TabelaArracoamento from "../pages/tabelaArracoamento";
 import Biometria from "../pages/biometria";
 import Equipe from "../pages/equipe";
+import DashboardApp from "../pages/dashboardApp";
 
 
 
@@ -26,6 +27,7 @@ const Paths = () => {
                     <Route path="TabelaArracoamento" element={<TabelaArracoamento/>} />
                     <Route path="Biometria" element={<Biometria/>} />
                     <Route path="Equipe" element={<Equipe/>} />
+                    <Route path="Dashboard" element={<DashboardApp />} />
 
                 </Route>
             </Routes>
