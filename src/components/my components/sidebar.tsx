@@ -1,20 +1,22 @@
-import { Button, VStack } from '@chakra-ui/react';
+import { Button, VStack, HStack, Icon, Text } from '@chakra-ui/react';
 import { FaHouse } from 'react-icons/fa6';
 import { FiPlusCircle } from 'react-icons/fi';
 import { FaTasks, FaUsers } from 'react-icons/fa';
 import { AiOutlineTable } from 'react-icons/ai';
 import { FaWeightScale } from 'react-icons/fa6';
-
 import { useNavigate } from 'react-router-dom';
+import { ComponentType } from 'react';
 
 const SideBar = () => {
   const navigate = useNavigate();
 
   const SidebarButton = ({
     children,
+    icon: IconComponent,
     onClick,
   }: {
     children: string;
+    icon: ComponentType;
     onClick?: () => void;
   }) => {
     return (
@@ -32,59 +34,60 @@ const SideBar = () => {
           color: 'aliceblue',
         }}
       >
-        {children}
+        <HStack p={3}>
+          <Icon as={IconComponent} />
+          <Text>{children}</Text>
+        </HStack>
       </Button>
     );
   };
 
   return (
-    <>
-      <VStack
-        display={{ base: 'none', md: 'block' }}
+    <VStack
+      display={{ base: 'none', md: 'block' }}
+      color={'aliceblue'}
+      bg="#00000d"
+      w={'279px'}
+      h={'100vh'}
+      padding={'20px'}
+      gap={'20px'}
+      overflowY="auto"
+    >
+      <Button
+        bg={'none'}
         color={'aliceblue'}
-        bg="#00000d"
-        w={'279px'}
-        h={{ base: '100vh', md: '100vh' }}
-        padding={'20px'}
-        gap={'20px'}
-        overflowY="auto"
+        fontSize={'20px'}
+        borderRadius={'0px'}
+        mb={'20px'}
+        mt={'20px'}
+        onClick={() => navigate('/')}
       >
-        <Button
-          bg={'none'}
-          color={'aliceblue'}
-          fontSize={'20px'}
-          //
-          borderRadius={'0px'}
-          mb={'20px'}
-          mt={'20px'}
-          onClick={() => navigate('/')}
-        >
-          <FiPlusCircle />
-          Novo Projeto
-        </Button>
-        <SidebarButton onClick={() => navigate('/DashBoard')}>
-          <FaHouse />
-          DashBoard
-        </SidebarButton>
-        <SidebarButton onClick={() => navigate('/ListaProjetos')}>
-          <FaTasks />
-          Lista de projetos
-        </SidebarButton>
+        <HStack p={3}>
+          <Icon as={FiPlusCircle} />
+          <Text>Novo Projeto</Text>
+        </HStack>
+      </Button>
+      
+      <SidebarButton icon={FaHouse} onClick={() => navigate('/DashBoard')}>
+        DashBoard
+      </SidebarButton>
+      
+      <SidebarButton icon={FaTasks} onClick={() => navigate('/ListaProjetos')}>
+        Lista de projetos
+      </SidebarButton>
 
-        <SidebarButton onClick={() => navigate('/TabelaArracoamento')}>
-          <AiOutlineTable />
-          Tabela de Arraçoamento
-        </SidebarButton>
-        <SidebarButton onClick={() => navigate('/Biometria')}>
-          <FaWeightScale />
-          Biometria
-        </SidebarButton>
-        <SidebarButton onClick={() => navigate('/Equipe')}>
-          <FaUsers />
-          Equipe
-        </SidebarButton>
-      </VStack>
-    </>
+      <SidebarButton icon={AiOutlineTable} onClick={() => navigate('/TabelaArracoamento')}>
+        Tabela de Arraçoamento
+      </SidebarButton>
+      
+      <SidebarButton icon={FaWeightScale} onClick={() => navigate('/Biometria')}>
+        Biometria
+      </SidebarButton>
+      
+      <SidebarButton icon={FaUsers} onClick={() => navigate('/Equipe')}>
+        Equipe
+      </SidebarButton>
+    </VStack>
   );
 };
 
